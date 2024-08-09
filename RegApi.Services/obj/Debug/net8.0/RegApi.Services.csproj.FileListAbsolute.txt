@@ -1,0 +1,15 @@
+C:\Users\petro.onyshko_hebron\source\repos\RegApi\RegApi.Services\bin\Debug\net8.0\RegApi.Services.deps.json
+C:\Users\petro.onyshko_hebron\source\repos\RegApi\RegApi.Services\bin\Debug\net8.0\RegApi.Services.runtimeconfig.json
+C:\Users\petro.onyshko_hebron\source\repos\RegApi\RegApi.Services\bin\Debug\net8.0\RegApi.Services.dll
+C:\Users\petro.onyshko_hebron\source\repos\RegApi\RegApi.Services\bin\Debug\net8.0\RegApi.Services.pdb
+C:\Users\petro.onyshko_hebron\source\repos\RegApi\RegApi.Services\obj\Debug\net8.0\RegApi.Services.csproj.AssemblyReference.cache
+C:\Users\petro.onyshko_hebron\source\repos\RegApi\RegApi.Services\obj\Debug\net8.0\RegApi.Services.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\petro.onyshko_hebron\source\repos\RegApi\RegApi.Services\obj\Debug\net8.0\RegApi.Services.AssemblyInfoInputs.cache
+C:\Users\petro.onyshko_hebron\source\repos\RegApi\RegApi.Services\obj\Debug\net8.0\RegApi.Services.AssemblyInfo.cs
+C:\Users\petro.onyshko_hebron\source\repos\RegApi\RegApi.Services\obj\Debug\net8.0\RegApi.Services.csproj.CoreCompileInputs.cache
+C:\Users\petro.onyshko_hebron\source\repos\RegApi\RegApi.Services\obj\Debug\net8.0\RegApi.Services.sourcelink.json
+C:\Users\petro.onyshko_hebron\source\repos\RegApi\RegApi.Services\obj\Debug\net8.0\RegApi.Services.dll
+C:\Users\petro.onyshko_hebron\source\repos\RegApi\RegApi.Services\obj\Debug\net8.0\refint\RegApi.Services.dll
+C:\Users\petro.onyshko_hebron\source\repos\RegApi\RegApi.Services\obj\Debug\net8.0\RegApi.Services.pdb
+C:\Users\petro.onyshko_hebron\source\repos\RegApi\RegApi.Services\obj\Debug\net8.0\RegApi.Services.genruntimeconfig.cache
+C:\Users\petro.onyshko_hebron\source\repos\RegApi\RegApi.Services\obj\Debug\net8.0\ref\RegApi.Services.dll
