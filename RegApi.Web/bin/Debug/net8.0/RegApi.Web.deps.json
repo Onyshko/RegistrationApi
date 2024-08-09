@@ -1012,7 +1012,9 @@
           "AutoMapper": "13.0.1",
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "8.0.7",
           "Microsoft.EntityFrameworkCore": "8.0.7",
-          "Microsoft.EntityFrameworkCore.SqlServer": "8.0.7"
+          "Microsoft.EntityFrameworkCore.SqlServer": "8.0.7",
+          "RegApi.Domain": "1.0.0",
+          "RegApi.Repository": "1.0.0"
         },
         "runtime": {
           "RegApi.Services.dll": {}

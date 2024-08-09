@@ -202,7 +202,14 @@
         "frameworks": {
           "net8.0": {
             "targetAlias": "net8.0",
-            "projectReferences": {}
+            "projectReferences": {
+              "C:\\Users\\petro.onyshko_hebron\\source\\repos\\RegApi\\RegApi.Domain\\RegApi.Domain.csproj": {
+                "projectPath": "C:\\Users\\petro.onyshko_hebron\\source\\repos\\RegApi\\RegApi.Domain\\RegApi.Domain.csproj"
+              },
+              "C:\\Users\\petro.onyshko_hebron\\source\\repos\\RegApi\\RegApi.Repository\\RegApi.Repository.csproj": {
+                "projectPath": "C:\\Users\\petro.onyshko_hebron\\source\\repos\\RegApi\\RegApi.Repository\\RegApi.Repository.csproj"
+              }
+            }
           }
         },
         "warningProperties": {

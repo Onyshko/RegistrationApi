@@ -1600,6 +1600,39 @@
             "rid": "win"
           }
         }
+      },
+      "RegApi.Domain/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "dependencies": {
+          "AutoMapper": "13.0.1",
+          "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "8.0.7",
+          "Microsoft.EntityFrameworkCore": "8.0.7",
+          "Microsoft.EntityFrameworkCore.SqlServer": "8.0.7"
+        },
+        "compile": {
+          "bin/placeholder/RegApi.Domain.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/RegApi.Domain.dll": {}
+        }
+      },
+      "RegApi.Repository/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "dependencies": {
+          "AutoMapper": "13.0.1",
+          "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "8.0.7",
+          "Microsoft.EntityFrameworkCore": "8.0.7",
+          "Microsoft.EntityFrameworkCore.SqlServer": "8.0.7",
+          "RegApi.Domain": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/RegApi.Repository.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/RegApi.Repository.dll": {}
+        }
       }
     }
   },
@@ -4300,6 +4333,16 @@
         "system.windows.extensions.nuspec",
         "useSharedDesignerContext.txt"
       ]
+    },
+    "RegApi.Domain/1.0.0": {
+      "type": "project",
+      "path": "../RegApi.Domain/RegApi.Domain.csproj",
+      "msbuildProject": "../RegApi.Domain/RegApi.Domain.csproj"
+    },
+    "RegApi.Repository/1.0.0": {
+      "type": "project",
+      "path": "../RegApi.Repository/RegApi.Repository.csproj",
+      "msbuildProject": "../RegApi.Repository/RegApi.Repository.csproj"
     }
   },
   "projectFileDependencyGroups": {
@@ -4308,7 +4351,9 @@
       "Microsoft.AspNetCore.Identity.EntityFrameworkCore >= 8.0.7",
       "Microsoft.EntityFrameworkCore >= 8.0.7",
       "Microsoft.EntityFrameworkCore.SqlServer >= 8.0.7",
-      "Microsoft.EntityFrameworkCore.Tools >= 8.0.7"
+      "Microsoft.EntityFrameworkCore.Tools >= 8.0.7",
+      "RegApi.Domain >= 1.0.0",
+      "RegApi.Repository >= 1.0.0"
     ]
   },
   "packageFolders": {
@@ -4338,7 +4383,14 @@
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Users\\petro.onyshko_hebron\\source\\repos\\RegApi\\RegApi.Domain\\RegApi.Domain.csproj": {
+              "projectPath": "C:\\Users\\petro.onyshko_hebron\\source\\repos\\RegApi\\RegApi.Domain\\RegApi.Domain.csproj"
+            },
+            "C:\\Users\\petro.onyshko_hebron\\source\\repos\\RegApi\\RegApi.Repository\\RegApi.Repository.csproj": {
+              "projectPath": "C:\\Users\\petro.onyshko_hebron\\source\\repos\\RegApi\\RegApi.Repository\\RegApi.Repository.csproj"
+            }
+          }
         }
       },
       "warningProperties": {
