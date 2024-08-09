@@ -1,0 +1,15 @@
+C:\Users\petro.onyshko_hebron\source\repos\RegApi\RegApi.Domain\bin\Debug\net8.0\RegApi.Domain.deps.json
+C:\Users\petro.onyshko_hebron\source\repos\RegApi\RegApi.Domain\bin\Debug\net8.0\RegApi.Domain.runtimeconfig.json
+C:\Users\petro.onyshko_hebron\source\repos\RegApi\RegApi.Domain\bin\Debug\net8.0\RegApi.Domain.dll
+C:\Users\petro.onyshko_hebron\source\repos\RegApi\RegApi.Domain\bin\Debug\net8.0\RegApi.Domain.pdb
+C:\Users\petro.onyshko_hebron\source\repos\RegApi\RegApi.Domain\obj\Debug\net8.0\RegApi.Domain.csproj.AssemblyReference.cache
+C:\Users\petro.onyshko_hebron\source\repos\RegApi\RegApi.Domain\obj\Debug\net8.0\RegApi.Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\petro.onyshko_hebron\source\repos\RegApi\RegApi.Domain\obj\Debug\net8.0\RegApi.Domain.AssemblyInfoInputs.cache
+C:\Users\petro.onyshko_hebron\source\repos\RegApi\RegApi.Domain\obj\Debug\net8.0\RegApi.Domain.AssemblyInfo.cs
+C:\Users\petro.onyshko_hebron\source\repos\RegApi\RegApi.Domain\obj\Debug\net8.0\RegApi.Domain.csproj.CoreCompileInputs.cache
+C:\Users\petro.onyshko_hebron\source\repos\RegApi\RegApi.Domain\obj\Debug\net8.0\RegApi.Domain.sourcelink.json
+C:\Users\petro.onyshko_hebron\source\repos\RegApi\RegApi.Domain\obj\Debug\net8.0\RegApi.Domain.dll
+C:\Users\petro.onyshko_hebron\source\repos\RegApi\RegApi.Domain\obj\Debug\net8.0\refint\RegApi.Domain.dll
+C:\Users\petro.onyshko_hebron\source\repos\RegApi\RegApi.Domain\obj\Debug\net8.0\RegApi.Domain.pdb
+C:\Users\petro.onyshko_hebron\source\repos\RegApi\RegApi.Domain\obj\Debug\net8.0\RegApi.Domain.genruntimeconfig.cache
+C:\Users\petro.onyshko_hebron\source\repos\RegApi\RegApi.Domain\obj\Debug\net8.0\ref\RegApi.Domain.dll
