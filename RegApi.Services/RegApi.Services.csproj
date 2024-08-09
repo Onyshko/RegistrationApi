@@ -17,4 +17,9 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\RegApi.Domain\RegApi.Domain.csproj" />
+    <ProjectReference Include="..\RegApi.Repository\RegApi.Repository.csproj" />
+  </ItemGroup>
+
 </Project>

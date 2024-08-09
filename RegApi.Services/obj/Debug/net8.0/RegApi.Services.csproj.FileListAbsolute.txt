@@ -13,3 +13,8 @@ C:\Users\petro.onyshko_hebron\source\repos\RegApi\RegApi.Services\obj\Debug\net8
 C:\Users\petro.onyshko_hebron\source\repos\RegApi\RegApi.Services\obj\Debug\net8.0\RegApi.Services.pdb
 C:\Users\petro.onyshko_hebron\source\repos\RegApi\RegApi.Services\obj\Debug\net8.0\RegApi.Services.genruntimeconfig.cache
 C:\Users\petro.onyshko_hebron\source\repos\RegApi\RegApi.Services\obj\Debug\net8.0\ref\RegApi.Services.dll
+C:\Users\petro.onyshko_hebron\source\repos\RegApi\RegApi.Services\bin\Debug\net8.0\RegApi.Domain.dll
+C:\Users\petro.onyshko_hebron\source\repos\RegApi\RegApi.Services\bin\Debug\net8.0\RegApi.Domain.pdb
+C:\Users\petro.onyshko_hebron\source\repos\RegApi\RegApi.Services\obj\Debug\net8.0\RegApi.S.63AD0292.Up2Date
+C:\Users\petro.onyshko_hebron\source\repos\RegApi\RegApi.Services\bin\Debug\net8.0\RegApi.Repository.dll
+C:\Users\petro.onyshko_hebron\source\repos\RegApi\RegApi.Services\bin\Debug\net8.0\RegApi.Repository.pdb

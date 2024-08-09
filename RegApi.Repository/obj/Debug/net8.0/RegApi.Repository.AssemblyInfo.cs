@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("RegApi.Repository")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+01f7e9621b2fdc6d54c5413e71995eb5493a3e03")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+fb0c40ef9bf31c56b92532c249b6a18641a52b5e")]
 [assembly: System.Reflection.AssemblyProductAttribute("RegApi.Repository")]
 [assembly: System.Reflection.AssemblyTitleAttribute("RegApi.Repository")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
