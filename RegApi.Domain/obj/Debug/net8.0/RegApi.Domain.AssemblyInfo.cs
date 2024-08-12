@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("RegApi.Domain")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+01f7e9621b2fdc6d54c5413e71995eb5493a3e03")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+bf444569f3c1ceef6d909cdd9ebd656d5205bfcf")]
 [assembly: System.Reflection.AssemblyProductAttribute("RegApi.Domain")]
 [assembly: System.Reflection.AssemblyTitleAttribute("RegApi.Domain")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

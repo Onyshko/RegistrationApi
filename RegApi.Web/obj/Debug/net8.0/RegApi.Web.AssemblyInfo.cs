@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("RegApi.Web")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+fb0c40ef9bf31c56b92532c249b6a18641a52b5e")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+bf444569f3c1ceef6d909cdd9ebd656d5205bfcf")]
 [assembly: System.Reflection.AssemblyProductAttribute("RegApi.Web")]
 [assembly: System.Reflection.AssemblyTitleAttribute("RegApi.Web")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
