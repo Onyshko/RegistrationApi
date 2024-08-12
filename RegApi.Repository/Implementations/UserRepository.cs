@@ -17,5 +17,15 @@ namespace RegApi.Repository.Implementations
         {
             return await _userManager.CreateAsync(user, password);
         }
+
+        public async Task<User> FindByNameAsync(string email)
+        {
+            return (await _userManager.FindByNameAsync(email))!;
+        }
+
+        public async Task<bool> CheckPassword(User user, string password)
+        {
+            return await _userManager.CheckPasswordAsync(user, password);
+        }
     }
 }

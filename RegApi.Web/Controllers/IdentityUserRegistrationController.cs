@@ -9,14 +9,16 @@ namespace RegApi.Web.Controllers
 {
     [Route("api/accounts")]
     [ApiController]
-    public class IdentityUserRegistration : ControllerBase
+    public class IdentityUserRegistrationController : ControllerBase
     {
         private readonly IUserService _userService;
+        private readonly IJwtService _jwtService;
         private readonly IMapper _mapper;
 
-        public IdentityUserRegistration(IUserService userRepo, IMapper mapper)
+        public IdentityUserRegistrationController(IUserService userService, IJwtService jwtService, IMapper mapper)
         {
-            _userService = userRepo;
+            _userService = userService;
+            _jwtService = jwtService;
             _mapper = mapper;
         }
 
@@ -37,5 +39,15 @@ namespace RegApi.Web.Controllers
             return StatusCode(201);
         }
 
+        [HttpPost("authenticate")]
+        public async Task<IActionResult> Authenticate([FromBody] UserAuthenticationModel userAuthenticationModel)
+        {
+            if (!await _userService.CheckPassword(userAuthenticationModel))
+                return Unauthorized(new AuthenticationResponsModel { ErrorMessage = "Invalid Authentication" });
+
+            var token = await _jwtService.CreateToken(userAuthenticationModel);
+
+            return Ok(new AuthenticationResponsModel { IsAuthSuccessful = true, Token = token });
+        }
     }
 }
