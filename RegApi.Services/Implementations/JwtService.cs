@@ -8,10 +8,9 @@ namespace RegApi.Services.Implementations
     public class JwtService : IJwtService
     {
         private readonly JwtHandler _jwtHandler;
-        private readonly IUserService _userService;
         private readonly IUserRepository _userRepo;
 
-        public JwtService(JwtHandler jwtHandler, IUserService userService, IUserRepository userRepo)
+        public JwtService(JwtHandler jwtHandler, IUserRepository userRepo)
         {
             _jwtHandler = jwtHandler;
             _userRepo = userRepo;

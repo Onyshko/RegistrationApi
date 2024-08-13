@@ -15,5 +15,7 @@ namespace RegApi.Services.Models
 
         [Required(ErrorMessage = "The password and confirmation password do not match")]
         public string? ConfirmPassword { get; set; }
+
+        public string? ClientUri { get; set; }
     }
 }

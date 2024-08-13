@@ -18,6 +18,11 @@ namespace RegApi.Repository.Implementations
             return await _userManager.CreateAsync(user, password);
         }
 
+        public async Task<string> GenerateEmailConfirmationTokenAsync(User user)
+        {
+            return await _userManager.GenerateEmailConfirmationTokenAsync(user);
+        }
+
         public async Task<IdentityResult> AddToRoleAsync(User user, string role)
         {
             return await _userManager.AddToRoleAsync(user, role);
@@ -28,6 +33,11 @@ namespace RegApi.Repository.Implementations
             return (await _userManager.FindByNameAsync(email))!;
         }
 
+        public async Task<bool> IsEmailConfirmed(User user)
+        {
+            return await _userManager.IsEmailConfirmedAsync(user);
+        }
+
         public async Task<bool> CheckPassword(User user, string password)
         {
             return await _userManager.CheckPasswordAsync(user, password);
@@ -36,6 +46,16 @@ namespace RegApi.Repository.Implementations
         public async Task<IList<string>> GetRolesAsync(User user)
         {
             return await _userManager.GetRolesAsync(user);
+        }
+
+        public async Task<User?> FindByEmailAsync(string email)
+        {
+            return await _userManager.FindByEmailAsync(email);
+        }
+
+        public  async Task<IdentityResult> ConfirmEmailAsync(User user, string token)
+        {
+            return await _userManager.ConfirmEmailAsync(user, token);
         }
     }
 }

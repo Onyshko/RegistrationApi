@@ -6,6 +6,7 @@ namespace RegApi.Services.Interfaces
     public interface IUserService
     {
         Task<IList<string>> RegistrateAsync(UserRegistrationModel user);
-        Task<bool> CheckPassword(UserAuthenticationModel userAuthenticationModel);
+        Task<string> CheckOfUserAsync(UserAuthenticationModel userAuthenticationModel);
+        Task<string> EmailCheckAsync(string email, string token);
     }
 }
