@@ -7,6 +7,7 @@ using RegApi.Repository.Context;
 using RegApi.Repository.Handlers;
 using RegApi.Repository.Implementations;
 using RegApi.Repository.Interfaces;
+using RegApi.Repository.Models;
 using RegApi.Services.Implementations;
 using RegApi.Services.Interfaces;
 using RegApi.Services.Mapping;
@@ -19,6 +20,7 @@ builder.Services.AddAutoMapper(typeof(UserProfile).Assembly);
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IJwtService, JwtService>();
+builder.Services.AddScoped<IEmailSender, EmailSender>();
 
 builder.Services.AddDbContext<DatabaseContext>(opts =>
     opts.UseSqlServer(builder.Configuration.GetConnectionString("ConnectionString")));
@@ -27,7 +29,8 @@ builder.Services.AddIdentity<User, Role>(opt =>
 {
     opt.Password.RequiredLength = 7;
 })
-.AddEntityFrameworkStores<DatabaseContext>();
+        .AddEntityFrameworkStores<DatabaseContext>()
+        .AddDefaultTokenProviders(); ;
 
 var jwtSettings = builder.Configuration.GetSection("JWTSettings");
 builder.Services.AddAuthentication(opt =>
@@ -55,6 +58,12 @@ builder.Services.AddAuthorization(options =>
 });
 
 builder.Services.AddSingleton<JwtHandler>();
+
+var emailConfig = builder.Configuration
+        .GetSection("EmailConfiguration")
+        .Get<EmailConfiguration>();
+builder.Services.AddSingleton(emailConfig);
+
 
 builder.Services.AddControllers();
 

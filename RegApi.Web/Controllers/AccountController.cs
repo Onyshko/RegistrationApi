@@ -40,12 +40,33 @@ namespace RegApi.Web.Controllers
         [HttpPost("authenticate")]
         public async Task<IActionResult> Authenticate([FromBody] UserAuthenticationModel userAuthenticationModel)
         {
-            if (!await _userService.CheckPassword(userAuthenticationModel))
-                return Unauthorized(new AuthenticationResponsModel { ErrorMessage = "Invalid Authentication" });
+            var responseCheck = await _userService.CheckOfUserAsync(userAuthenticationModel);
+
+            if (responseCheck == "Invalid Request")
+            {
+                return BadRequest(responseCheck);
+            }
+            else if (responseCheck != "")
+            {
+                return Unauthorized(new AuthenticationResponsModel { ErrorMessage = responseCheck });
+            }       
 
             var token = await _jwtService.CreateToken(userAuthenticationModel);
 
             return Ok(new AuthenticationResponsModel { IsAuthSuccessful = true, Token = token });
+        }
+
+        [HttpGet("emailconfirmation")]
+        public async Task<IActionResult> EmailConfirmation([FromQuery] string email, [FromQuery] string token)
+        {
+            var checkResult = await _userService.EmailCheckAsync(email, token);
+
+            if (checkResult != "")
+            {
+                return BadRequest(checkResult);
+            }
+
+            return Ok();
         }
     }
 }
