@@ -18,6 +18,11 @@ namespace RegApi.Repository.Implementations
             return await _userManager.CreateAsync(user, password);
         }
 
+        public async Task<IdentityResult> AddToRoleAsync(User user, string role)
+        {
+            return await _userManager.AddToRoleAsync(user, role);
+        }
+
         public async Task<User> FindByNameAsync(string email)
         {
             return (await _userManager.FindByNameAsync(email))!;
@@ -26,6 +31,11 @@ namespace RegApi.Repository.Implementations
         public async Task<bool> CheckPassword(User user, string password)
         {
             return await _userManager.CheckPasswordAsync(user, password);
+        }
+
+        public async Task<IList<string>> GetRolesAsync(User user)
+        {
+            return await _userManager.GetRolesAsync(user);
         }
     }
 }

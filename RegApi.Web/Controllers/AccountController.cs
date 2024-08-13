@@ -9,13 +9,13 @@ namespace RegApi.Web.Controllers
 {
     [Route("api/accounts")]
     [ApiController]
-    public class IdentityUserRegistrationController : ControllerBase
+    public class AccountController : ControllerBase
     {
         private readonly IUserService _userService;
         private readonly IJwtService _jwtService;
         private readonly IMapper _mapper;
 
-        public IdentityUserRegistrationController(IUserService userService, IJwtService jwtService, IMapper mapper)
+        public AccountController(IUserService userService, IJwtService jwtService, IMapper mapper)
         {
             _userService = userService;
             _jwtService = jwtService;
@@ -29,11 +29,9 @@ namespace RegApi.Web.Controllers
                 return BadRequest();
 
             var result = await _userService.RegistrateAsync(userRegistrationModel);
-            if (!result.Succeeded)
+            if (result.Count != 0)
             {
-                var errors = result.Errors.Select(e => e.Description);
-
-                return BadRequest(new RegistrationResponseModel { Errors = errors });
+                return BadRequest(new RegistrationResponseModel { Errors = result });
             }
 
             return StatusCode(201);

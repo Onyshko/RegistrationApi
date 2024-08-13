@@ -23,7 +23,7 @@ builder.Services.AddScoped<IJwtService, JwtService>();
 builder.Services.AddDbContext<DatabaseContext>(opts =>
     opts.UseSqlServer(builder.Configuration.GetConnectionString("ConnectionString")));
 
-builder.Services.AddIdentity<User, IdentityRole>(opt =>
+builder.Services.AddIdentity<User, Role>(opt =>
 {
     opt.Password.RequiredLength = 7;
 })
@@ -46,6 +46,12 @@ builder.Services.AddAuthentication(opt =>
         ValidAudience = jwtSettings["validAudience"],
         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings.GetSection("securityKey").Value))
     };
+});
+
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("OnlyAdminUsers",
+        policy => policy.RequireRole("Admin"));
 });
 
 builder.Services.AddSingleton<JwtHandler>();
