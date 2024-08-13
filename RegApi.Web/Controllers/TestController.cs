@@ -8,7 +8,7 @@ namespace RegApi.Web.Controllers
     public class TestController : ControllerBase
     {
         [HttpGet]
-        [Authorize]
+        [Authorize(Policy = "OnlyAdminUsers")]
         public IActionResult TestAction() => Ok("test message");
     }
 }

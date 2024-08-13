@@ -1,7 +1,5 @@
 ﻿using AutoMapper;
-using Microsoft.AspNetCore.Identity;
 using RegApi.Domain.Entities;
-using RegApi.Repository.Handlers;
 using RegApi.Repository.Interfaces;
 using RegApi.Services.Interfaces;
 using RegApi.Services.Models;
@@ -19,10 +17,23 @@ namespace RegApi.Services.Implementations
             _mapper = mapper;
         }
 
-        public async Task<IdentityResult> RegistrateAsync(UserRegistrationModel userRegistrationModel)
+        public async Task<IList<string>> RegistrateAsync(UserRegistrationModel userRegistrationModel)
         {
             var user = _mapper.Map<User>(userRegistrationModel);
-            return await _userRepo.RegisterAsync(user, userRegistrationModel.Password!);
+            var result = await _userRepo.RegisterAsync(user, userRegistrationModel.Password!);
+
+            var errors = new List<string>();
+
+            if (!result.Succeeded)
+            {
+                errors = result.Errors.Select(e => e.Description).ToList();
+
+                return errors;
+            }
+
+            await _userRepo.AddToRoleAsync(user, "Visitor");
+
+            return errors;
         }
 
         public async Task<bool> CheckPassword(UserAuthenticationModel userAuthenticationModel)
