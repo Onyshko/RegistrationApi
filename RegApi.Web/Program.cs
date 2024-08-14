@@ -22,8 +22,13 @@ builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IJwtService, JwtService>();
 builder.Services.AddScoped<IEmailSender, EmailSender>();
 
+if (builder.Environment.IsDevelopment())
+{
+    builder.Configuration.AddUserSecrets<Program>();
+}
+
 builder.Services.AddDbContext<DatabaseContext>(opts =>
-    opts.UseSqlServer(builder.Configuration.GetConnectionString("ConnectionString")));
+    opts.UseSqlServer(builder.Configuration["ConnectionStrings:ConnectionStrings"]));
 
 builder.Services.AddIdentity<User, Role>(opt =>
 {
