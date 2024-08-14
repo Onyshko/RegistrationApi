@@ -8,5 +8,7 @@ namespace RegApi.Services.Interfaces
         Task<IList<string>> RegistrateAsync(UserRegistrationModel user);
         Task<string> CheckOfUserAsync(UserAuthenticationModel userAuthenticationModel);
         Task<string> EmailCheckAsync(string email, string token);
+        Task<bool> ForgotPassword(ForgotPasswordModel forgotPasswordModel);
+        Task<IList<string>> ResetPassword(ResetPasswordModel resetPasswordModel);
     }
 }

@@ -29,8 +29,11 @@ builder.Services.AddIdentity<User, Role>(opt =>
 {
     opt.Password.RequiredLength = 7;
 })
-        .AddEntityFrameworkStores<DatabaseContext>()
-        .AddDefaultTokenProviders(); ;
+.AddEntityFrameworkStores<DatabaseContext>()
+.AddDefaultTokenProviders();
+
+builder.Services.Configure<DataProtectionTokenProviderOptions>(opt =>
+    opt.TokenLifespan = TimeSpan.FromHours(2));
 
 var jwtSettings = builder.Configuration.GetSection("JWTSettings");
 builder.Services.AddAuthentication(opt =>

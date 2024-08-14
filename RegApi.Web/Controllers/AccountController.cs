@@ -68,5 +68,30 @@ namespace RegApi.Web.Controllers
 
             return Ok();
         }
+
+        [HttpPost("forgotpassword")]
+        public async Task<IActionResult> ForgotPassword([FromBody] ForgotPasswordModel forgotPasswordModel)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest();
+
+            if (!await _userService.ForgotPassword(forgotPasswordModel))
+                return BadRequest("Invalid Request");
+
+            return Ok();
+        }
+
+        [HttpPost("resetpassword")]
+        public async Task<IActionResult> ResetPassword([FromBody] ResetPasswordModel resetPasswordModel)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest();
+
+            var result = await _userService.ResetPassword(resetPasswordModel);
+            if (result.Count != 0)
+                return BadRequest(new { Errors = result });
+
+            return Ok();
+        }
     }
 }

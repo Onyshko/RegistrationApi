@@ -14,5 +14,7 @@ namespace RegApi.Repository.Interfaces
         Task<IList<string>> GetRolesAsync(User user);
         Task<User?> FindByEmailAsync(string email);
         Task<IdentityResult> ConfirmEmailAsync(User user, string token);
+        Task<string> GeneratePasswordResetTokenAsync(User user);
+        Task<IdentityResult> ResetPasswordAsync(User user, string token, string password);
     }
 }

@@ -80,5 +80,46 @@ namespace RegApi.Services.Implementations
 
             return string.Empty;
         }
+
+        public async Task<bool> ForgotPassword(ForgotPasswordModel forgotPasswordModel)
+        {
+            var user = await _userRepo.FindByEmailAsync(forgotPasswordModel.Email!);
+            if (user is null)
+                return false;
+
+            var token = await _userRepo.GeneratePasswordResetTokenAsync(user);
+            var param = new Dictionary<string, string?>
+            {
+                { "token", token },
+                { "email", forgotPasswordModel.Email }
+            };
+
+            var callback = QueryHelpers.AddQueryString(forgotPasswordModel.ClientUri!, param);
+            
+            var message = new Message([user.Email], "Reset password token", callback);
+
+            await _emailSender.SendEmailAsync(message);
+
+            return true;
+        }
+
+        public async Task<IList<string>> ResetPassword(ResetPasswordModel resetPasswordModel)
+        {
+            var errorList = new List<string>();
+            var user = await _userRepo.FindByEmailAsync(resetPasswordModel.Email!);
+            if (user is null)
+            {
+                errorList.Add("Invalid Request");
+                return errorList;
+            }
+
+            var result = await _userRepo.ResetPasswordAsync(user, resetPasswordModel.Token!, resetPasswordModel.Password!);
+            if (!result.Succeeded)
+            {
+                result.Errors.ToList().ForEach(error => errorList.Add(error.Description));
+            }
+
+            return errorList;
+        }
     }
 }
