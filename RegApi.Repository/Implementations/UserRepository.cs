@@ -1,14 +1,15 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using RegApi.Domain.Entities;
+using RegApi.Repository.Context;
 using RegApi.Repository.Interfaces;
 
 namespace RegApi.Repository.Implementations
 {
-    public class UserRepository : IUserRepository
+    public class UserRepository : BaseRepository<User>, IUserRepository
     {
         private readonly UserManager<User> _userManager;
 
-        public UserRepository(UserManager<User> userManager)
+        public UserRepository(UserManager<User> userManager, DatabaseContext context) : base(context)
         {
             _userManager = userManager;
         }
