@@ -3,7 +3,7 @@ using RegApi.Domain.Entities;
 
 namespace RegApi.Repository.Interfaces
 {
-    public interface IUserRepository
+    public interface IUserRepository : IBaseRepository<User>
     {
         Task<IdentityResult> RegisterAsync(User user, string password);
         Task<string> GenerateEmailConfirmationTokenAsync(User user);

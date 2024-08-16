@@ -8,18 +8,18 @@ namespace RegApi.Services.Implementations
     public class JwtService : IJwtService
     {
         private readonly JwtHandler _jwtHandler;
-        private readonly IUserRepository _userRepo;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public JwtService(JwtHandler jwtHandler, IUserRepository userRepo)
+        public JwtService(JwtHandler jwtHandler, IUnitOfWork unitOfWork)
         {
             _jwtHandler = jwtHandler;
-            _userRepo = userRepo;
+            _unitOfWork = unitOfWork;
         }
 
         public async Task<string> CreateToken(UserAuthenticationModel userAuthenticationModel)
         {
-            var user = await _userRepo.FindByNameAsync(userAuthenticationModel.Email!);
-            var roles = await _userRepo.GetRolesAsync(user);
+            var user = await _unitOfWork.UserRepository().FindByNameAsync(userAuthenticationModel.Email!);
+            var roles = await _unitOfWork.UserRepository().GetRolesAsync(user);
 
             return _jwtHandler.CreateToken(user, roles);
         }
