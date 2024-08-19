@@ -18,8 +18,8 @@ namespace RegApi.Services.Implementations
 
         public async Task<string> CreateToken(UserAuthenticationModel userAuthenticationModel)
         {
-            var user = await _unitOfWork.UserRepository().FindByNameAsync(userAuthenticationModel.Email!);
-            var roles = await _unitOfWork.UserRepository().GetRolesAsync(user);
+            var user = await _unitOfWork.UserAccountRepository().FindByNameAsync(userAuthenticationModel.Email!);
+            var roles = await _unitOfWork.UserAccountRepository().GetRolesAsync(user);
 
             return _jwtHandler.CreateToken(user, roles);
         }

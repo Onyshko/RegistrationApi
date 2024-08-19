@@ -11,7 +11,7 @@ namespace RegApi.Repository.SeedConfiguration
             builder.HasData(
                 new IdentityUserRole<string>
                 {
-                    UserId = "aaee42b9-aa16-40cb-bee4-1c51d41e3e4a",
+                    UserId = "16494060-c41a-4343-9128-388ed5e61d77",
                     RoleId = "11a3d48f-e7ff-46e6-a897-9664e603a824"
                 }
             );
