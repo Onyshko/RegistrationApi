@@ -18,5 +18,7 @@ namespace RegApi.Repository.Context
             builder.ApplyConfiguration(new RoleConfiguration());
             builder.ApplyConfiguration(new UserRoleConfiguration());
         }
+
+        public DbSet<Ticket> Tickets { get; set; }
     }
 }

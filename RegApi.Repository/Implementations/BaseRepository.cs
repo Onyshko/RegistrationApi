@@ -1,40 +1,67 @@
-﻿using RegApi.Repository.Context;
+﻿using Microsoft.EntityFrameworkCore;
+using RegApi.Domain.Entities;
+using RegApi.Repository.Context;
 using RegApi.Repository.Interfaces;
 
 namespace RegApi.Repository.Implementations
 {
-    public class BaseRepository<T> : IBaseRepository<T> where T : class
+    public class BaseRepository<T> : IBaseRepository<T> 
+        where T : BaseEntity
     {
-        private readonly DatabaseContext _context;
+        protected readonly DatabaseContext _context;
 
         public BaseRepository(DatabaseContext context)
         {
             _context = context;
         }
 
-        public IQueryable<T> GetAll()
+        public async Task<IList<T>> GetAllAsync()
         {
-            return _context.Set<T>();
+            return await _context.Set<T>().ToListAsync();
         }
 
-        public T GetById(int id)
+        public async Task<T> GetAsync(int id)
         {
-            return _context.Set<T>().Find(id);
+            return (await _context.Set<T>().FindAsync(id))!;
         }
 
-        public void Add(T entity)
+        public async Task<int> AddAsync(T entity)
         {
-            _context.Set<T>().Add(entity);
+            await _context.Set<T>().AddAsync(entity);
+
+            return entity.Id;
         }
 
-        public void Update(T entity)
+        public async Task<T?> UpdateAsync(T entity)
         {
-            _context.Set<T>().Update(entity);
+            var existingEntity = await GetAsync(entity.Id);
+
+            if (existingEntity == null)
+            {
+                return existingEntity;
+            }
+
+            UpdateRelatedEntities(existingEntity, entity);
+            _context.Entry(existingEntity).CurrentValues.SetValues(entity);
+
+            return existingEntity;
         }
 
-        public void Delete(T entity)
+        public async Task<bool> DeleteAsync(int id)
         {
-            _context.Set<T>().Remove(entity);
+            var existingEntity = await GetAsync(id);
+
+            if (existingEntity == null)
+            {
+                return false;
+            }
+
+            _context.Entry(existingEntity).State = EntityState.Deleted;
+            return true;
+        }
+
+        protected virtual void UpdateRelatedEntities(T existingEntity, T entity)
+        {
         }
     }
 }

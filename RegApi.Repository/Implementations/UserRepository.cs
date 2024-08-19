@@ -1,72 +1,56 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.EntityFrameworkCore;
 using RegApi.Domain.Entities;
 using RegApi.Repository.Context;
 using RegApi.Repository.Interfaces;
 
 namespace RegApi.Repository.Implementations
 {
-    public class UserRepository : BaseRepository<User>, IUserRepository
+    public class UserRepository : IUSerRepository
     {
-        private readonly UserManager<User> _userManager;
+        private readonly DatabaseContext _context;
 
-        public UserRepository(UserManager<User> userManager, DatabaseContext context) : base(context)
+        public UserRepository(DatabaseContext context)
         {
-            _userManager = userManager;
+            _context = context;
+        }
+        public async Task<List<User>> GetAllAsync()
+        {
+            return await _context.Users.AsNoTracking().Include(x => x.Tickets).ToListAsync();
         }
 
-        public async Task<IdentityResult> RegisterAsync(User user, string password)
+        public async Task<User> GetAsync(string id)
         {
-            return await _userManager.CreateAsync(user, password);
+            return (await _context.Users.FirstOrDefaultAsync(x => x.Id == id))!;
         }
 
-        public async Task<string> GenerateEmailConfirmationTokenAsync(User user)
+        public async Task<User?> UpdateAsync(User user)
         {
-            return await _userManager.GenerateEmailConfirmationTokenAsync(user);
+            var existingEntity = await GetAsync(user.Id);
+            if (existingEntity == null)
+            {
+                return existingEntity;
+            }
+
+            UpdateRelatedEntities(existingEntity, user);
+            _context.Entry(existingEntity).CurrentValues.SetValues(user);
+            await _context.SaveChangesAsync();
+
+            return existingEntity;
         }
 
-        public async Task<IdentityResult> AddToRoleAsync(User user, string role)
+        private void UpdateRelatedEntities(User existingEntity, User user)
         {
-            return await _userManager.AddToRoleAsync(user, role);
-        }
+            var toDeleteAlbums = existingEntity.Tickets.Where(x => !user.Tickets.Any(y => y.Id == x.Id)).ToList();
+            foreach (var album in toDeleteAlbums)
+            {
+                existingEntity.Tickets.Remove(album);
+            }
 
-        public async Task<User> FindByNameAsync(string email)
-        {
-            return (await _userManager.FindByNameAsync(email))!;
-        }
-
-        public async Task<bool> IsEmailConfirmed(User user)
-        {
-            return await _userManager.IsEmailConfirmedAsync(user);
-        }
-
-        public async Task<bool> CheckPassword(User user, string password)
-        {
-            return await _userManager.CheckPasswordAsync(user, password);
-        }
-
-        public async Task<IList<string>> GetRolesAsync(User user)
-        {
-            return await _userManager.GetRolesAsync(user);
-        }
-
-        public async Task<User?> FindByEmailAsync(string email)
-        {
-            return await _userManager.FindByEmailAsync(email);
-        }
-
-        public  async Task<IdentityResult> ConfirmEmailAsync(User user, string token)
-        {
-            return await _userManager.ConfirmEmailAsync(user, token);
-        }
-
-        public async Task<string> GeneratePasswordResetTokenAsync(User user)
-        {
-            return await _userManager.GeneratePasswordResetTokenAsync(user);
-        }
-
-        public async Task<IdentityResult> ResetPasswordAsync(User user, string token, string password)
-        {
-            return await _userManager.ResetPasswordAsync(user, token, password);
+            var toAddAlbums = user.Tickets.Where(x => !existingEntity.Tickets.Any(y => y.Id == x.Id)).ToList();
+            foreach (var album in toAddAlbums)
+            {
+                existingEntity.Tickets.Add(album);
+            }
         }
     }
 }

@@ -9,7 +9,8 @@ namespace RegApi.Repository.Implementations
     {
         private readonly DatabaseContext _context;
         private Dictionary<Type, object> _repositories;
-        private IUserRepository _userRepository;
+        private IUserAccountRepository _userAccountRepository;
+        private IUSerRepository _userRepository;
         private readonly UserManager<User> _userManager;
 
         public UnitOfWork(DatabaseContext context, UserManager<User> userManager)
@@ -19,7 +20,7 @@ namespace RegApi.Repository.Implementations
             _userManager = userManager;
         }
 
-        public IBaseRepository<TEntity> GetRepository<TEntity>() where TEntity : class
+        public IBaseRepository<TEntity> GetRepository<TEntity>() where TEntity : BaseEntity
         {
             if (_repositories.ContainsKey(typeof(TEntity)))
             {
@@ -31,9 +32,9 @@ namespace RegApi.Repository.Implementations
             return repository;
         }
 
-        public void SaveChanges()
+        public async Task SaveChangesAsync()
         {
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
 
         public void Dispose()
@@ -41,6 +42,7 @@ namespace RegApi.Repository.Implementations
             _context.Dispose();
         }
 
-        public IUserRepository UserRepository() => _userRepository ??= new UserRepository(_userManager, _context);
+        public IUserAccountRepository UserAccountRepository() => _userAccountRepository ??= new UserAccountRepository(_userManager);
+        public IUSerRepository UserRepository() => _userRepository ??= new UserRepository(_context);
     }
 }
