@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using RegApi.Domain.Entities;
+using RegApi.Services.Extensions.Exceptions;
 using RegApi.Services.Interfaces;
 using RegApi.Services.Models;
 
@@ -25,31 +24,27 @@ namespace RegApi.Web.Controllers
         [HttpPost("register")]
         public async Task<IActionResult> RegisterUser([FromBody] UserRegistrationModel userRegistrationModel)
         {
-            if (userRegistrationModel is null)
-                return BadRequest();
-
-            var result = await _userService.RegistrateAsync(userRegistrationModel);
-            if (result.Count != 0)
+            try
             {
-                return BadRequest(new RegistrationResponseModel { Errors = result });
-            }
+                await _userService.RegistrateAsync(userRegistrationModel);
 
-            return StatusCode(201);
+                return StatusCode(201);
+            }
+            catch(IdentityException ex)
+            {
+                return BadRequest(ex.Errors);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         [HttpPost("authenticate")]
         public async Task<IActionResult> Authenticate([FromBody] UserAuthenticationModel userAuthenticationModel)
         {
-            var responseCheck = await _userService.CheckOfUserAsync(userAuthenticationModel);
 
-            if (responseCheck == "Invalid Request")
-            {
-                return BadRequest(responseCheck);
-            }
-            else if (responseCheck != "")
-            {
-                return Unauthorized(new AuthenticationResponsModel { ErrorMessage = responseCheck });
-            }       
+            await _userService.CheckOfUserAsync(userAuthenticationModel);
 
             var token = await _jwtService.CreateToken(userAuthenticationModel);
 
@@ -59,12 +54,7 @@ namespace RegApi.Web.Controllers
         [HttpGet("emailconfirmation")]
         public async Task<IActionResult> EmailConfirmation([FromQuery] string email, [FromQuery] string token)
         {
-            var checkResult = await _userService.EmailCheckAsync(email, token);
-
-            if (checkResult != "")
-            {
-                return BadRequest(checkResult);
-            }
+            await _userService.EmailCheckAsync(email, token);
 
             return Ok();
         }
@@ -73,10 +63,9 @@ namespace RegApi.Web.Controllers
         public async Task<IActionResult> ForgotPassword([FromBody] ForgotPasswordModel forgotPasswordModel)
         {
             if (!ModelState.IsValid)
-                return BadRequest();
+                throw new Exception();
 
-            if (!await _userService.ForgotPassword(forgotPasswordModel))
-                return BadRequest("Invalid Request");
+            await _userService.ForgotPassword(forgotPasswordModel);
 
             return Ok();
         }
@@ -85,11 +74,9 @@ namespace RegApi.Web.Controllers
         public async Task<IActionResult> ResetPassword([FromBody] ResetPasswordModel resetPasswordModel)
         {
             if (!ModelState.IsValid)
-                return BadRequest();
+                throw new Exception();
 
-            var result = await _userService.ResetPassword(resetPasswordModel);
-            if (result.Count != 0)
-                return BadRequest(new { Errors = result });
+            await _userService.ResetPassword(resetPasswordModel);
 
             return Ok();
         }

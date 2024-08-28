@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Mvc;
 using RegApi.Repository.Constants;
 using RegApi.Services.Interfaces;
 using RegApi.Services.Models;
-using System.Diagnostics;
 using System.Security.Claims;
 
 namespace RegApi.Web.Controllers
@@ -23,9 +22,6 @@ namespace RegApi.Web.Controllers
         [Authorize(Policy = "OnlyAdminUsers")]
         public async Task<IActionResult> AddTicket([FromBody] TicketModel ticketModel)
         {
-            if (ticketModel is null)
-                return BadRequest();
-
             var ticketId = await _ticketService.AddTicket(ticketModel);
 
             return StatusCode(201);
@@ -54,12 +50,7 @@ namespace RegApi.Web.Controllers
         public async Task<IActionResult> UpdateStatus([FromQuery] int ticketId)
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier)!;
-            var result = await _ticketService.UpdateStatus(ticketId, userId);
-
-            if (result != "")
-            {
-                return BadRequest(result);
-            }
+            await _ticketService.UpdateStatus(ticketId, userId);
 
             return Ok(201);
         }

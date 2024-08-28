@@ -5,8 +5,15 @@ using RegApi.Repository.Constants;
 
 namespace RegApi.Repository.SeedConfiguration
 {
+    /// <summary>
+    /// Configures the entity type for the <see cref="Role"/> entity.
+    /// </summary>
     public class RoleConfiguration : IEntityTypeConfiguration<Role>
     {
+        /// <summary>
+        /// Configures the entity with specific settings for the <see cref="Role"/> entity.
+        /// </summary>
+        /// <param name="builder">The builder used to configure the entity type.</param>
         public void Configure(EntityTypeBuilder<Role> builder)
         {
             builder.HasData(
