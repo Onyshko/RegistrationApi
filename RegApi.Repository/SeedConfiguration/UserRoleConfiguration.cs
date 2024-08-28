@@ -4,8 +4,15 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace RegApi.Repository.SeedConfiguration
 {
+    /// <summary>
+    /// Configures the <see cref="IdentityUserRole{string}"/> entity with initial role-user data.
+    /// </summary>
     public class UserRoleConfiguration : IEntityTypeConfiguration<IdentityUserRole<string>>
     {
+        /// <summary>
+        /// Configures the entity with specific settings for the <see cref="IdentityUserRole{string}"/> entity.
+        /// </summary>
+        /// <param name="builder">The builder used to configure the entity type.</param>
         public void Configure(EntityTypeBuilder<IdentityUserRole<string>> builder)
         {
             builder.HasData(

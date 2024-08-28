@@ -1,7 +1,7 @@
 ﻿namespace RegApi.Domain.Entities
 {
-    public class BaseEntity
+    public class BaseEntity<TEntityId>
     {
-        public int Id { get; set; }
+        public TEntityId Id { get; set; }
     }
 }

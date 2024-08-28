@@ -2,7 +2,7 @@
 
 namespace RegApi.Domain.Entities
 {
-    public class Ticket : BaseEntity
+    public class Ticket : BaseEntity<int>
     {
         public string Name { get; set; }
         public string? Description { get; set; }
