@@ -1,4 +1,4 @@
-﻿namespace RegApi.Services.Extensions.Exceptions
+﻿namespace RegApi.Shared.Extensions.Exceptions
 {
     public class EmailException : Exception
     {

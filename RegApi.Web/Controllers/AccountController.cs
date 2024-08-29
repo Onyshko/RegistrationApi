@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using RegApi.Services.Extensions.Exceptions;
+using RegApi.Shared.Extensions.Exceptions;
 using RegApi.Services.Interfaces;
 using RegApi.Services.Models;
 

@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using RegApi.Repository.Constants;
 using RegApi.Services.Interfaces;
 using RegApi.Services.Models;
+using RegApi.Shared.Constants;
 using System.Security.Claims;
 
 namespace RegApi.Web.Controllers

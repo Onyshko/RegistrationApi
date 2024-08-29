@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace RegApi.Domain.Enums
+namespace RegApi.Shared.Enums
 {
     public enum Status
     {

@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
-using RegApi.Services.Extensions.Exceptions;
 using RegApi.Services.Models;
+using RegApi.Shared.Extensions.Exceptions;
 using System.Net;
 
 namespace RegApi.Services.Utility.Exceptions

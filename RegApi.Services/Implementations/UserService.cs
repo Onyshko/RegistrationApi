@@ -3,9 +3,9 @@ using Microsoft.AspNetCore.WebUtilities;
 using RegApi.Domain.Entities;
 using RegApi.Repository.Interfaces;
 using RegApi.Repository.Models;
-using RegApi.Services.Extensions.Exceptions;
 using RegApi.Services.Interfaces;
 using RegApi.Services.Models;
+using RegApi.Shared.Extensions.Exceptions;
 
 namespace RegApi.Services.Implementations
 {

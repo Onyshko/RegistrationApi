@@ -1,4 +1,4 @@
-﻿using RegApi.Domain.Enums;
+﻿using RegApi.Shared.Enums;
 
 namespace RegApi.Domain.Entities
 {
