@@ -4,11 +4,11 @@ namespace RegApi.Services.Models
 {
     public class ForgotPasswordModel
     {
-        [Required]
+        [Required(ErrorMessage = "Email is required")]
         [EmailAddress]
-        public string? Email { get; set; }
+        public required string Email { get; set; }
 
-        [Required]
-        public string? ClientUri { get; set; }
+        [Required(ErrorMessage = "ClientUri is required")]
+        public required string ClientUri { get; set; }
     }
 }
