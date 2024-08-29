@@ -1,4 +1,4 @@
-﻿namespace RegApi.Repository.Constants
+﻿namespace RegApi.Shared.Constants
 {
     public class RoleNames
     {

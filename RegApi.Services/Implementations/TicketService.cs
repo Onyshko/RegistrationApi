@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
 using RegApi.Domain.Entities;
-using RegApi.Domain.Enums;
 using RegApi.Repository.Interfaces;
 using RegApi.Services.Interfaces;
 using RegApi.Services.Models;
+using RegApi.Shared.Enums;
 
 namespace RegApi.Services.Implementations
 {
