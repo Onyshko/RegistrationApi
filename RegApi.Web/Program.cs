@@ -1,3 +1,4 @@
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -5,26 +6,13 @@ using Microsoft.IdentityModel.Tokens;
 using RegApi.Domain.Entities;
 using RegApi.Repository.Context;
 using RegApi.Repository.Handlers;
-using RegApi.Repository.Implementations;
-using RegApi.Repository.Interfaces;
 using RegApi.Repository.Models;
-using RegApi.Services.Implementations;
-using RegApi.Services.Interfaces;
-using RegApi.Services.Mapping;
+using RegApi.Repository.Utility.Registrations;
 using RegApi.Services.Utility.Exceptions;
+using RegApi.Services.Utility.Registrations;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
-
-builder.Services.AddAutoMapper(typeof(UserProfile).Assembly);
-builder.Services.AddAutoMapper(typeof(TicketProfile).Assembly);
-
-builder.Services.AddScoped<IUserAccountRepository, UserAccountRepository>();
-builder.Services.AddScoped<IUserService, UserService>();
-builder.Services.AddScoped<IJwtService, JwtService>();
-builder.Services.AddScoped<ITicketService, TicketService>();
-builder.Services.AddScoped<IEmailSender, EmailSender>();
-builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 if (builder.Environment.IsDevelopment())
 {
@@ -79,8 +67,14 @@ builder.Services.AddSingleton(emailConfig);
 
 builder.Services.AddControllers();
 
+builder.Services.AddFluentValidationAutoValidation();
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddRepositoryLayerRegistration();
+builder.Services.AddServiceLayerRegistration();
+
 
 
 var app = builder.Build();
