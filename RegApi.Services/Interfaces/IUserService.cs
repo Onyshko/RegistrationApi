@@ -31,13 +31,20 @@ namespace RegApi.Services.Interfaces
         /// Initiates the forgot password process by generating a password reset token and sending it to the user's email asynchronously.
         /// </summary>
         /// <param name="forgotPasswordModel">The forgot password details including email and client URI.</param>
-        Task ForgotPassword(ForgotPasswordModel forgotPasswordModel);
+        Task ForgotPasswordAsync(ForgotPasswordModel forgotPasswordModel);
 
         /// <summary>
         /// Resets the user's password using a reset token and new password asynchronously.
         /// </summary>
         /// <param name="resetPasswordModel">The reset password details including email, token, and new password.</param>
-        Task ResetPassword(ResetPasswordModel resetPasswordModel);
+        Task ResetPasswordAsync(ResetPasswordModel resetPasswordModel);
+
+        /// <summary>
+        /// Deletes the user account with the specified ID asynchronously.
+        /// </summary>
+        /// <param name="accountId">The unique identifier of the user account to be deleted.</param>
+        /// <returns>A task representing the asynchronous operation.</returns>
+        Task DeleteAccountAsync(string accountId);
     }
 
 }

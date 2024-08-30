@@ -65,7 +65,7 @@ namespace RegApi.Web.Controllers
             if (!ModelState.IsValid)
                 throw new Exception();
 
-            await _userService.ForgotPassword(forgotPasswordModel);
+            await _userService.ForgotPasswordAsync(forgotPasswordModel);
 
             return Ok();
         }
@@ -76,7 +76,15 @@ namespace RegApi.Web.Controllers
             if (!ModelState.IsValid)
                 throw new Exception();
 
-            await _userService.ResetPassword(resetPasswordModel);
+            await _userService.ResetPasswordAsync(resetPasswordModel);
+
+            return Ok();
+        }
+
+        [HttpDelete("delete")]
+        public async Task<IActionResult> DeleteAccount([FromQuery] string accountId)
+        {
+            await _userService.DeleteAccountAsync(accountId);
 
             return Ok();
         }
