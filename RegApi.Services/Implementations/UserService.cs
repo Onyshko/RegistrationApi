@@ -115,7 +115,7 @@ namespace RegApi.Services.Implementations
         /// </summary>
         /// <param name="forgotPasswordModel">The forgot password details including email and client URI.</param>
         /// <exception cref="NullReferenceException">Thrown when the user with the provided email does not exist.</exception>
-        public async Task ForgotPassword(ForgotPasswordModel forgotPasswordModel)
+        public async Task ForgotPasswordAsync(ForgotPasswordModel forgotPasswordModel)
         {
             var user = await _unitOfWork.UserAccountRepository().FindByEmailAsync(forgotPasswordModel.Email!);
             if (user is null)
@@ -142,7 +142,7 @@ namespace RegApi.Services.Implementations
         /// </summary>
         /// <param name="resetPasswordModel">The reset password details including email, token, and new password.</param>
         /// <exception cref="IdentityException">Thrown when the user does not exist or the password reset fails due to validation errors.</exception>
-        public async Task ResetPassword(ResetPasswordModel resetPasswordModel)
+        public async Task ResetPasswordAsync(ResetPasswordModel resetPasswordModel)
         {
             var errorList = new List<string>();
             var user = await _unitOfWork.UserAccountRepository().FindByEmailAsync(resetPasswordModel.Email!);
@@ -158,6 +158,28 @@ namespace RegApi.Services.Implementations
                 result.Errors.ToList().ForEach(error => errorList.Add(error.Description));
                 throw new IdentityException(errorList);
             }
+
+            await _unitOfWork.SaveChangesAsync();
+        }
+
+        /// <summary>
+        /// Deletes a user account with the specified ID asynchronously.
+        /// </summary>
+        /// <param name="accountId">The unique identifier of the user account to be deleted.</param>
+        /// <exception cref="NullReferenceException">Thrown if the user with the specified ID is not found.</exception>
+        /// <exception cref="IdentityException">Thrown if the deletion operation fails.</exception>
+        /// <returns>A task representing the asynchronous operation.</returns>
+        public async Task DeleteAccountAsync(string accountId)
+        {
+            var user = await _unitOfWork.UserAccountRepository().FindByIdAsync(accountId);
+
+            if (user is null)
+                throw new NullReferenceException();
+
+            var result = await _unitOfWork.UserAccountRepository().DeleteAsync(user);
+
+            if (!result.Succeeded)
+                throw new IdentityException(result.Errors.Select(x => x.Description).ToList());
 
             await _unitOfWork.SaveChangesAsync();
         }

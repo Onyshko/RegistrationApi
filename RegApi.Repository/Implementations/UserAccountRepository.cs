@@ -132,5 +132,25 @@ namespace RegApi.Repository.Implementations
         {
             return await _userManager.ResetPasswordAsync(user, token, password);
         }
+
+        /// <summary>
+        /// Deletes the specified user account asynchronously.
+        /// </summary>
+        /// <param name="user">The user account to be deleted.</param>
+        /// <returns>A task that represents the asynchronous operation. The task result contains an <see cref="IdentityResult"/> indicating the outcome of the delete operation.</returns>
+        public async Task<IdentityResult> DeleteAsync(User user)
+        {
+            return await _userManager.DeleteAsync(user);
+        }
+
+        /// <summary>
+        /// Finds a user by their unique identifier asynchronously.
+        /// </summary>
+        /// <param name="userId">The unique identifier of the user to be found.</param>
+        /// <returns>A task that represents the asynchronous operation. The task result contains the <see cref="User"/> object if found; otherwise, <c>null</c>.</returns>
+        public async Task<User> FindByIdAsync(string userId)
+        {
+            return (await _userManager.FindByIdAsync(userId))!;
+        }
     }
 }

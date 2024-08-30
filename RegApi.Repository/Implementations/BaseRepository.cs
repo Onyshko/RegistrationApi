@@ -82,13 +82,12 @@ namespace RegApi.Repository.Implementations
         /// <returns>Edited entity record</returns>
         public async Task<TEntity?> UpdateAsync(TEntity entity)
         {
-            var existingEntity = await GetAsync(entity.Id, includeProperties: GetIncludeProperties());
+            var existingEntity = await GetAsync(entity.Id);
             if (existingEntity == null)
             {
                 return null;
             }
 
-            UpdateRelatedEntities(existingEntity, entity);
             _context.Entry(existingEntity).CurrentValues.SetValues(entity);
             await _context.SaveChangesAsync();
 
@@ -111,67 +110,6 @@ namespace RegApi.Repository.Implementations
 
             _context.Entry(existingEntity).State = EntityState.Deleted;
             return true;
-        }
-
-        /// <summary>
-        /// Help update related entities
-        /// </summary>
-        /// <param name="existingEntity">Entity from database</param>
-        /// <param name="entity">Updated entity</param>
-        private void UpdateRelatedEntities(TEntity existingEntity, TEntity entity)
-        {
-            var navigationProperties = _context.Entry(existingEntity).Navigations.Where(n => n.Metadata.IsCollection);
-
-            foreach (var navigation in navigationProperties)
-            {
-                var existingCollection = (IEnumerable<object>)navigation.CurrentValue!;
-                var updatedCollection = (IEnumerable<object>)navigation.Metadata.PropertyInfo?.GetValue(entity)!;
-
-                var toDelete = existingCollection.Where(x => !updatedCollection.Any(y => GetPrimaryKeyValue(y).Equals(GetPrimaryKeyValue(x)))).ToList();
-                var toAdd = updatedCollection.Where(x => !existingCollection.Any(y => GetPrimaryKeyValue(y).Equals(GetPrimaryKeyValue(x)))).ToList();
-
-                foreach (var item in toDelete)
-                {
-                    navigation.Metadata.PropertyInfo?.GetValue(existingEntity)?.GetType().GetMethod("Remove")?.Invoke(navigation.CurrentValue, new[] { item });
-                }
-
-                foreach (var item in toAdd)
-                {
-                    navigation.Metadata.PropertyInfo?.GetValue(existingEntity)?.GetType().GetMethod("Add")?.Invoke(navigation.CurrentValue, new[] { item });
-                }
-            }
-        }
-
-        /// <summary>
-        /// Retrieves the value of the primary key for a given entity.
-        /// </summary>
-        /// <param name="entity">The entity from which to extract the primary key value.</param>
-        /// <returns>The primary key value of the entity, or null if the primary key cannot be found.</returns>
-        private object GetPrimaryKeyValue(object entity)
-        {
-            var key = _context.Model.FindEntityType(entity.GetType())?.FindPrimaryKey();
-            return key?.Properties.Select(p => entity.GetType().GetProperty(p.Name)?.GetValue(entity)).FirstOrDefault()!;
-        }
-
-        /// <summary>
-        /// Identifies and returns an array of expressions representing the collection navigation properties
-        /// of the TEntity type for inclusion in queries.
-        /// </summary>
-        /// <returns>An array of expressions representing the collection navigation properties, 
-        /// or an empty array if none are found.</returns>
-        private Expression<Func<TEntity, object>>[] GetIncludeProperties()
-        {
-            var navigationProperties = _context.Model.FindEntityType(typeof(TEntity))?.GetNavigations()
-                .Where(n => n.IsCollection)
-                .Select(n => n.PropertyInfo)
-                .ToArray();
-
-            if (navigationProperties != null)
-            {
-                return navigationProperties.Select(np => (Expression<Func<TEntity, object>>)(entity => np.GetValue(entity)!)).ToArray();
-            }
-
-            return Array.Empty<Expression<Func<TEntity, object>>>();
         }
     }
 }

@@ -17,6 +17,12 @@ namespace RegApi.Repository.Context
             base.OnModelCreating(builder);
             builder.ApplyConfiguration(new RoleConfiguration());
             builder.ApplyConfiguration(new UserRoleConfiguration());
+
+            builder.Entity<User>()
+                .HasMany(u => u.Tickets)
+                .WithOne(t => t.User)
+                .HasForeignKey(t => t.UserId)
+                .OnDelete(DeleteBehavior.Cascade);
         }
 
         public DbSet<Ticket> Tickets { get; set; }
