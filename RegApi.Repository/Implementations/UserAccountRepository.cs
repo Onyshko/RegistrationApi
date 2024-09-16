@@ -23,9 +23,16 @@ namespace RegApi.Repository.Implementations
         /// <param name="user">The user to register.</param>
         /// <param name="password">The password for the new user.</param>
         /// <returns>An IdentityResult indicating the success or failure of the registration.</returns>
-        public async Task<IdentityResult> RegisterAsync(User user, string password)
+        public async Task<IdentityResult> RegisterAsync(User user, string? password = null)
         {
-            return await _userManager.CreateAsync(user, password);
+            if (password is null)
+            {
+                return await _userManager.CreateAsync(user);
+            }
+            else
+            {
+                return await _userManager.CreateAsync(user, password!);
+            }
         }
 
         /// <summary>

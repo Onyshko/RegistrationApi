@@ -8,11 +8,11 @@ namespace RegApi.Services.Interfaces
     public interface IJwtService
     {
         /// <summary>
-        /// Creates a JWT token for the specified user.
+        /// Generates a JWT token for the specified user's email.
         /// </summary>
-        /// <param name="userAuthenticationModel">The user authentication details including email.</param>
-        /// <returns>A JWT token for the authenticated user.</returns>
-        Task<string> CreateToken(UserAuthenticationModel userAuthenticationModel);
+        /// <param name="email">The email address of the user for whom the token is being created.</param>
+        /// <returns>A task representing the asynchronous operation, containing the JWT token for the user.</returns>
+        Task<string> CreateToken(string email);
     }
 
 }

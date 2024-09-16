@@ -1,8 +1,11 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
-using RegApi.Shared.Extensions.Exceptions;
 using RegApi.Services.Interfaces;
 using RegApi.Services.Models;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Authentication.Google;
 
 namespace RegApi.Web.Controllers
 {
@@ -24,20 +27,9 @@ namespace RegApi.Web.Controllers
         [HttpPost("register")]
         public async Task<IActionResult> RegisterUser([FromBody] UserRegistrationModel userRegistrationModel)
         {
-            try
-            {
-                await _userService.RegistrateAsync(userRegistrationModel);
+            await _userService.RegistrateAsync(userRegistrationModel);
 
-                return StatusCode(201);
-            }
-            catch(IdentityException ex)
-            {
-                return BadRequest(ex.Errors);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+            return StatusCode(201);
         }
 
         [HttpPost("authenticate")]
@@ -46,7 +38,7 @@ namespace RegApi.Web.Controllers
 
             await _userService.CheckOfUserAsync(userAuthenticationModel);
 
-            var token = await _jwtService.CreateToken(userAuthenticationModel);
+            var token = await _jwtService.CreateToken(userAuthenticationModel.Email);
 
             return Ok(new AuthenticationResponsModel { IsAuthSuccessful = true, Token = token });
         }
@@ -87,6 +79,26 @@ namespace RegApi.Web.Controllers
             await _userService.DeleteAccountAsync(accountId);
 
             return Ok();
+        }
+
+        [HttpGet("login")]
+        public IActionResult Login()
+        {
+            var props = new AuthenticationProperties { RedirectUri = "/api/accounts/google-auth" };
+            
+            return Challenge(props, GoogleDefaults.AuthenticationScheme);
+        }
+
+        [HttpGet("google-auth")]
+        public async Task<IActionResult> GoogleLogin()
+        {
+            var response = await HttpContext.AuthenticateAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+
+            var email = await _userService.FindOrCreateGoogleAsync(response);
+
+            var token = await _jwtService.CreateToken(email);
+
+            return Ok(new AuthenticationResponsModel { IsAuthSuccessful = true, Token = token });
         }
     }
 }

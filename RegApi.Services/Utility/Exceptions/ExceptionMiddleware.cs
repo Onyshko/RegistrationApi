@@ -27,6 +27,7 @@ namespace RegApi.Services.Utility.Exceptions
         /// <param name="httpContext">The HTTP context for the current request.</param>
         /// <returns>A task representing the asynchronous operation.</returns>
         public async Task InvokeAsync(HttpContext httpContext)
+        
         {
             try
             {
@@ -47,7 +48,7 @@ namespace RegApi.Services.Utility.Exceptions
             {
                 AuthenticateException => ex.Message,
                 NullReferenceException => ex.Message,
-                IdentityException => ex.Message,
+                IdentityException identityException => string.Join(", ", identityException.Errors),
                 EmailException => "Invalid Email Confirmation Request",
                 _ => ex.Message
             };
