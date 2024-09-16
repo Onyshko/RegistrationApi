@@ -11,10 +11,10 @@ namespace RegApi.Repository.Migrations
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DeleteData(
+            /* migrationBuilder.DeleteData(
                 table: "AspNetUserRoles",
                 keyColumns: new[] { "RoleId", "UserId" },
-                keyValues: new object[] { "11a3d48f-e7ff-46e6-a897-9664e603a824", "aaee42b9-aa16-40cb-bee4-1c51d41e3e4a" });
+                keyValues: new object[] { "11a3d48f-e7ff-46e6-a897-9664e603a824", "aaee42b9-aa16-40cb-bee4-1c51d41e3e4a" });*/
 
             migrationBuilder.CreateTable(
                 name: "Tickets",
@@ -32,10 +32,10 @@ namespace RegApi.Repository.Migrations
                     table.PrimaryKey("PK_Tickets", x => x.Id);
                 });
 
-            migrationBuilder.InsertData(
+            /*migrationBuilder.InsertData(
                 table: "AspNetUserRoles",
                 columns: new[] { "RoleId", "UserId" },
-                values: new object[] { "11a3d48f-e7ff-46e6-a897-9664e603a824", "16494060-c41a-4343-9128-388ed5e61d77" });
+                values: new object[] { "11a3d48f-e7ff-46e6-a897-9664e603a824", "16494060-c41a-4343-9128-388ed5e61d77" });*/
         }
 
         /// <inheritdoc />
@@ -44,7 +44,7 @@ namespace RegApi.Repository.Migrations
             migrationBuilder.DropTable(
                 name: "Tickets");
 
-            migrationBuilder.DeleteData(
+            /*migrationBuilder.DeleteData(
                 table: "AspNetUserRoles",
                 keyColumns: new[] { "RoleId", "UserId" },
                 keyValues: new object[] { "11a3d48f-e7ff-46e6-a897-9664e603a824", "16494060-c41a-4343-9128-388ed5e61d77" });
@@ -52,7 +52,7 @@ namespace RegApi.Repository.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",
                 columns: new[] { "RoleId", "UserId" },
-                values: new object[] { "11a3d48f-e7ff-46e6-a897-9664e603a824", "aaee42b9-aa16-40cb-bee4-1c51d41e3e4a" });
+                values: new object[] { "11a3d48f-e7ff-46e6-a897-9664e603a824", "aaee42b9-aa16-40cb-bee4-1c51d41e3e4a" });*/
         }
     }
 }

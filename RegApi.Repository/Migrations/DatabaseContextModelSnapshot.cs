@@ -107,13 +107,6 @@ namespace RegApi.Repository.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetUserRoles", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            UserId = "16494060-c41a-4343-9128-388ed5e61d77",
-                            RoleId = "11a3d48f-e7ff-46e6-a897-9664e603a824"
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>

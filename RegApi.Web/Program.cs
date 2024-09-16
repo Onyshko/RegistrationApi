@@ -1,7 +1,10 @@
 using FluentValidation.AspNetCore;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication.Google;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using RegApi.Domain.Entities;
 using RegApi.Repository.Context;
@@ -33,11 +36,17 @@ builder.Services.Configure<DataProtectionTokenProviderOptions>(opt =>
     opt.TokenLifespan = TimeSpan.FromHours(2));
 
 var jwtSettings = builder.Configuration.GetSection("JWTSettings");
+var googleAuthentication = builder.Configuration.GetSection("GoogleAuthentication");
 builder.Services.AddAuthentication(opt =>
 {
     opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
     opt.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-}).AddJwtBearer(options =>
+})
+.AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, options =>
+{
+    builder.Configuration.Bind("CookieSettings", options);
+})
+.AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, options =>
 {
     options.TokenValidationParameters = new TokenValidationParameters
     {
@@ -49,6 +58,14 @@ builder.Services.AddAuthentication(opt =>
         ValidAudience = jwtSettings["validAudience"],
         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings.GetSection("securityKey").Value))
     };
+    builder.Configuration.Bind("JwtSettings", options);
+})
+.AddGoogle(options =>
+{
+    options.ClientId = googleAuthentication["ClientId"]!;
+    options.ClientSecret = googleAuthentication["ClientSecret"]!;
+    options.CallbackPath = googleAuthentication["CallbackPath"];
+    options.SignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
 });
 
 builder.Services.AddAuthorization(options =>
@@ -71,6 +88,7 @@ builder.Services.AddFluentValidationAutoValidation();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
 
 builder.Services.AddRepositoryLayerRegistration();
 builder.Services.AddServiceLayerRegistration();

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Identity;
 using RegApi.Services.Models;
 
 namespace RegApi.Services.Interfaces
@@ -45,6 +46,21 @@ namespace RegApi.Services.Interfaces
         /// <param name="accountId">The unique identifier of the user account to be deleted.</param>
         /// <returns>A task representing the asynchronous operation.</returns>
         Task DeleteAccountAsync(string accountId);
+
+        /// <summary>
+        /// Retrieves an existing user by email from the Google authentication result, or creates a new user if one is not found.
+        /// </summary>
+        /// <param name="response">The Google authentication result that includes user claims such as email and name.</param>
+        /// <returns>The email address of the user found or created.</returns>
+        /// <exception cref="NullReferenceException">Thrown if the authentication response or email claim is null.</exception>
+        /// <exception cref="IdentityException">Thrown if user registration fails.</exception>
+        /// <remarks>
+        /// This method searches for a user based on the email address obtained from the Google authentication response.
+        /// If the user does not exist in the system, a new user is created with the provided email and name. The new user is then
+        /// assigned the "Visitor" role, and all changes are committed to the database. The method returns the email address of the user.
+        /// </remarks>
+        Task<string> FindOrCreateGoogleAsync(AuthenticateResult response);
+
     }
 
 }

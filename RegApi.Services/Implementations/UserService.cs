@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using Azure.Identity;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.WebUtilities;
 using RegApi.Domain.Entities;
 using RegApi.Repository.Interfaces;
@@ -6,6 +8,7 @@ using RegApi.Repository.Models;
 using RegApi.Services.Interfaces;
 using RegApi.Services.Models;
 using RegApi.Shared.Extensions.Exceptions;
+using System.Security.Claims;
 
 namespace RegApi.Services.Implementations
 {
@@ -43,7 +46,7 @@ namespace RegApi.Services.Implementations
                 throw new NullReferenceException();
 
             var user = _mapper.Map<User>(userRegistrationModel);
-            var result = await _unitOfWork.UserAccountRepository().RegisterAsync(user, userRegistrationModel.Password!);
+            var result = await _unitOfWork.UserAccountRepository().RegisterAsync(user, userRegistrationModel.Password);
 
             if (!result.Succeeded)
             {
@@ -182,6 +185,56 @@ namespace RegApi.Services.Implementations
                 throw new IdentityException(result.Errors.Select(x => x.Description).ToList());
 
             await _unitOfWork.SaveChangesAsync();
+        }
+
+        /// <summary>
+        /// Finds an existing user by their email address or creates a new user based on Google authentication results.
+        /// </summary>
+        /// <param name="response">The result of Google authentication, including user claims such as email and name.</param>
+        /// <returns>The email address of the user that was found or created.</returns>
+        /// <exception cref="NullReferenceException">Thrown if the authentication result's principal or email claim is null.</exception>
+        /// <exception cref="IdentityException">Thrown if the registration of the new user fails.</exception>
+        /// <remarks>
+        /// This method first attempts to locate a user in the system using the email address obtained from the Google authentication result.
+        /// If the user does not exist, a new user is created with the provided email and name. The new user is then assigned the "Visitor" role.
+        /// All changes are committed to the database. The method returns the email address of the user.
+        /// </remarks>
+        public async Task<string> FindOrCreateGoogleAsync(AuthenticateResult response)
+        {
+            if (response.Principal is null)
+                throw new NullReferenceException();
+
+            var email = response.Principal.FindFirstValue(ClaimTypes.Email);
+
+            var user = await _unitOfWork.UserAccountRepository().FindByEmailAsync(email!);
+            if (user is null)
+            {
+                var newUser = new User
+                {
+                    FirstName = response.Principal.FindFirstValue(ClaimTypes.GivenName),
+                    LastName = response.Principal.FindFirstValue(ClaimTypes.Surname),
+                    UserName = email,
+                    Email = email,
+                    EmailConfirmed = true
+                };
+
+                var result = await _unitOfWork.UserAccountRepository().RegisterAsync(newUser);
+
+                if (!result.Succeeded)
+                {
+                    var errors = result.Errors.Select(e => e.Description);
+
+                    throw new IdentityException(errors);
+                }
+
+                user = await _unitOfWork.UserAccountRepository().FindByEmailAsync(email!);
+            }
+
+            await _unitOfWork.UserAccountRepository().AddToRoleAsync(user!, "Visitor");
+
+            await _unitOfWork.SaveChangesAsync();
+
+            return email!;
         }
     }
 }

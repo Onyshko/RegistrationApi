@@ -9,12 +9,13 @@ namespace RegApi.Repository.Interfaces
     public interface IUserAccountRepository
     {
         /// <summary>
-        /// Registers a new user with the specified password.
+        /// Registers a new user with an optional password.
         /// </summary>
-        /// <param name="user">The user to register.</param>
-        /// <param name="password">The password for the new user.</param>
-        /// <returns>An IdentityResult indicating the success or failure of the registration.</returns>
-        Task<IdentityResult> RegisterAsync(User user, string password);
+        /// <param name="user">The user to be registered.</param>
+        /// <param name="password">The password for the new user. If null, the user will be registered without a password.</param>
+        /// <returns>A task representing the asynchronous operation, containing an IdentityResult indicating the outcome of the registration.</returns>
+        Task<IdentityResult> RegisterAsync(User user, string? password = null);
+
 
         /// <summary>
         /// Generates an email confirmation token for the specified user.
