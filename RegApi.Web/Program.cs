@@ -1,11 +1,12 @@
+using Azure.Extensions.AspNetCore.Configuration.Secrets;
+using Azure.Identity;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Authentication.Google;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
+using Newtonsoft.Json;
 using RegApi.Domain.Entities;
 using RegApi.Repository.Context;
 using RegApi.Repository.Handlers;
@@ -17,13 +18,26 @@ using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
-if (builder.Environment.IsDevelopment())
+var keyVaultUri = new Uri(builder.Configuration["KeyVaultUri"]!);
+builder.Configuration.AddAzureKeyVault(keyVaultUri, new DefaultAzureCredential(), new AzureKeyVaultConfigurationOptions
 {
-    builder.Configuration.AddUserSecrets<Program>();
-}
+    ReloadInterval = TimeSpan.FromMinutes(5)
+});
 
+string testJson = "{\"test\": { \"test2\": \"test3\" }, \"test1\": { \"test2\": \"test3\" }}";
+var test = JsonConvert.DeserializeObject<Dictionary<string, object>>(testJson);
+var testNested = test["test"].ToString();
+
+
+var connectionStringJson = builder.Configuration["ConnectionStringAzure"];
+var connectionString = JsonConvert.DeserializeObject<Dictionary<string, object>>(connectionStringJson!);
 builder.Services.AddDbContext<DatabaseContext>(opts =>
-    opts.UseSqlServer(builder.Configuration["ConnectionStrings:ConnectionStrings"]));
+    opts.UseSqlServer($"Server={connectionString!["Server"]};" +
+                      $"Initial Catalog={connectionString!["InitialCatalog"]};" +
+                      $"Encrypt={connectionString!["Encrypt"]};" +
+                      $"TrustServerCertificate={connectionString!["TrustServerCertificate"]};" +
+                      $"Connection Timeout={connectionString!["ConnectionTimeout"]};" +
+                      $"Authentication={connectionString!["Authentication"]}"));
 
 builder.Services.AddIdentity<User, Role>(opt =>
 {
@@ -35,8 +49,10 @@ builder.Services.AddIdentity<User, Role>(opt =>
 builder.Services.Configure<DataProtectionTokenProviderOptions>(opt =>
     opt.TokenLifespan = TimeSpan.FromHours(2));
 
-var jwtSettings = builder.Configuration.GetSection("JWTSettings");
-var googleAuthentication = builder.Configuration.GetSection("GoogleAuthentication");
+var jwtSettingsJson = builder.Configuration["JWTSettings"];
+var jwtSettings = JsonConvert.DeserializeObject<JwtSettings>(jwtSettingsJson!);
+var googleAuthenticationJson = builder.Configuration["GoogleAuthentication"];
+var googleAuthentication = JsonConvert.DeserializeObject<Dictionary<string, object>>(googleAuthenticationJson!);
 builder.Services.AddAuthentication(opt =>
 {
     opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -54,17 +70,17 @@ builder.Services.AddAuthentication(opt =>
         ValidateAudience = true,
         ValidateLifetime = true,
         ValidateIssuerSigningKey = true,
-        ValidIssuer = jwtSettings["validIssuer"],
-        ValidAudience = jwtSettings["validAudience"],
-        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings.GetSection("securityKey").Value))
+        ValidIssuer = jwtSettings.ValidIssuer.ToString(),
+        ValidAudience = jwtSettings.ValidAudience.ToString(),
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings.SecurityKey.ToString()!))
     };
     builder.Configuration.Bind("JwtSettings", options);
 })
 .AddGoogle(options =>
 {
-    options.ClientId = googleAuthentication["ClientId"]!;
-    options.ClientSecret = googleAuthentication["ClientSecret"]!;
-    options.CallbackPath = googleAuthentication["CallbackPath"];
+    options.ClientId = googleAuthentication!["ClientId"].ToString()!;
+    options.ClientSecret = googleAuthentication["ClientSecret"].ToString()!;
+    options.CallbackPath = googleAuthentication["CallbackPath"].ToString();
     options.SignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
 });
 
@@ -76,10 +92,11 @@ builder.Services.AddAuthorization(options =>
 
 builder.Services.AddSingleton<JwtHandler>();
 
-var emailConfig = builder.Configuration
-        .GetSection("EmailConfiguration")
-        .Get<EmailConfiguration>();
+var emailConfigJson = builder.Configuration["EmailConfiguration"];
+var emailConfig = JsonConvert.DeserializeObject<EmailConfiguration>(emailConfigJson!);
+
 builder.Services.AddSingleton(emailConfig);
+builder.Services.AddSingleton(jwtSettings);
 
 
 builder.Services.AddControllers();

@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using RegApi.Domain.Entities;
+using RegApi.Repository.Models;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
@@ -10,12 +11,12 @@ namespace RegApi.Repository.Handlers
     public class JwtHandler
     {
         private readonly IConfiguration _configuration;
-        private readonly IConfigurationSection _jwtSettings;
+        private readonly JwtSettings _jwtSettings;
 
-        public JwtHandler(IConfiguration configuration)
+        public JwtHandler(IConfiguration configuration, JwtSettings jwtSettings)
         {
             _configuration = configuration;
-            _jwtSettings = _configuration.GetSection("JWTSettings");
+            _jwtSettings = jwtSettings;
         }
 
         public string CreateToken(User user, IList<string> roles)
@@ -29,7 +30,7 @@ namespace RegApi.Repository.Handlers
 
         private SigningCredentials GetSigningCredentials()
         {
-            var key = Encoding.UTF8.GetBytes(_jwtSettings["securityKey"]);
+            var key = Encoding.UTF8.GetBytes(_jwtSettings.SecurityKey!);
             var secret = new SymmetricSecurityKey(key);
 
             return new SigningCredentials(secret, SecurityAlgorithms.HmacSha256);
@@ -54,10 +55,10 @@ namespace RegApi.Repository.Handlers
         private JwtSecurityToken GenerateTokenOptions(SigningCredentials signingCredentials, List<Claim> claims)
         {
             var tokenOptions = new JwtSecurityToken(
-                issuer: _jwtSettings["validIssuer"],
-                audience: _jwtSettings["validAudience"],
+                issuer: _jwtSettings.ValidIssuer,
+                audience: _jwtSettings.ValidAudience,
                 claims: claims,
-                expires: DateTime.Now.AddMinutes(Convert.ToDouble(_jwtSettings["expiryInMinutes"])),
+                expires: DateTime.Now.AddMinutes(Convert.ToDouble(_jwtSettings.ExpiryInMinutes)),
                 signingCredentials: signingCredentials
                 );
 
