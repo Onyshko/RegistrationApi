@@ -1,7 +1,6 @@
 ﻿using RegApi.Repository.Handlers;
 using RegApi.Repository.Interfaces;
 using RegApi.Services.Interfaces;
-using RegApi.Services.Models;
 
 namespace RegApi.Services.Implementations
 {
