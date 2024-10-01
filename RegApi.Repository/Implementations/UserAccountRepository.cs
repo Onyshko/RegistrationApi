@@ -159,5 +159,15 @@ namespace RegApi.Repository.Implementations
         {
             return (await _userManager.FindByIdAsync(userId))!;
         }
+
+        /// <summary>
+        /// Updates the specified <see cref="User"/> entity in the identity store.
+        /// </summary>
+        /// <param name="user">The <see cref="User"/> object to be updated.</param>
+        /// <returns>An <see cref="IdentityResult"/> representing the outcome of the update operation.</returns>
+        public async Task<IdentityResult> UpdateAsync(User user)
+        {
+            return await _userManager.UpdateAsync(user);
+        }
     }
 }

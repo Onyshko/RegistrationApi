@@ -1,7 +1,11 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Azure.Storage;
+using Azure.Storage.Blobs;
+using Microsoft.AspNetCore.Identity;
 using RegApi.Domain.Entities;
 using RegApi.Repository.Context;
 using RegApi.Repository.Interfaces;
+using RegApi.Repository.Models;
+using RegApi.Repository.Models.BlobModels;
 
 namespace RegApi.Repository.Implementations
 {
@@ -10,16 +14,28 @@ namespace RegApi.Repository.Implementations
     /// </summary>
     public class UnitOfWork : IUnitOfWork
     {
-        private readonly DatabaseContext _context;
         private Dictionary<Type, object> _repositories;
         private IUserAccountRepository _userAccountRepository;
+        private IEmailSender _emailSender;
+        private IFileService _fileService;
+        private readonly DatabaseContext _context;
         private readonly UserManager<User> _userManager;
+        private readonly EmailConfiguration _emailConfig;
+        private readonly BlobContainerClient _containerClient;
+        private readonly BlobConfigurationModel _blobConfigurationModel;
 
-        public UnitOfWork(DatabaseContext context, UserManager<User> userManager)
+        public UnitOfWork(DatabaseContext context,
+                          UserManager<User> userManager,
+                          EmailConfiguration emailConfig,
+                          BlobContainerClient containerClient,
+                          BlobConfigurationModel blobConfigurationModel)
         {
             _context = context;
             _repositories = new Dictionary<Type, object>();
             _userManager = userManager;
+            _emailConfig = emailConfig;
+            _blobConfigurationModel = blobConfigurationModel;
+            _containerClient = containerClient;
         }
 
         /// <summary>
@@ -64,5 +80,17 @@ namespace RegApi.Repository.Implementations
         /// </summary>
         /// <returns>An instance of IUserAccountRepository.</returns>
         public IUserAccountRepository UserAccountRepository() => _userAccountRepository ??= new UserAccountRepository(_userManager);
+
+        /// <summary>
+        /// Provides an instance of <see cref="IEmailSender"/> service. If the service is not initialized, it creates a new instance of <see cref="EmailSender"/> with the specified configuration.
+        /// </summary>
+        /// <returns>An instance of <see cref="IEmailSender"/>.</returns>
+        public IEmailSender EmailSender() => _emailSender ??= new EmailSender(_emailConfig);
+
+        /// <summary>
+        /// Provides an instance of <see cref="IFileService"/> for managing files in Azure Blob Storage. If the service is not initialized, it creates a new instance of <see cref="FileService"/> using the provided Blob container client.
+        /// </summary>
+        /// <returns>An instance of <see cref="IFileService"/>.</returns>
+        public IFileService FileService() => _fileService ??= new FileService(_containerClient);
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using RegApi.Services.Models;
 
@@ -61,6 +62,15 @@ namespace RegApi.Services.Interfaces
         /// </remarks>
         Task<string> FindOrCreateGoogleAsync(AuthenticateResult response);
 
+        /// <summary>
+        /// Asynchronously uploads a user's avatar to Azure Blob Storage and updates the user's record with the new avatar URI.
+        /// </summary>
+        /// <param name="photo">The avatar image file to be uploaded.</param>
+        /// <param name="userId">The unique identifier of the user whose avatar is being uploaded.</param>
+        /// <exception cref="NullReferenceException">Thrown when the provided photo is null.</exception>
+        /// <exception cref="Exception">Thrown when the provided file is not an image.</exception>
+        /// <returns>A task that represents the asynchronous upload operation.</returns>
+        Task UploadAvatarAsync(IFormFile photo, string userId);
     }
 
 }

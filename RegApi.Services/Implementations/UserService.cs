@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Azure.Identity;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.WebUtilities;
 using RegApi.Domain.Entities;
 using RegApi.Repository.Interfaces;
@@ -18,7 +19,6 @@ namespace RegApi.Services.Implementations
     public class UserService : IUserService
     {
         private readonly IUnitOfWork _unitOfWork;
-        private readonly IEmailSender _emailSender;
         private readonly IMapper _mapper;
 
         /// <summary>
@@ -27,10 +27,9 @@ namespace RegApi.Services.Implementations
         /// <param name="unitOfWork">The unit of work for interacting with the repository.</param>
         /// <param name="emailSender">The email sender for sending confirmation and reset emails.</param>
         /// <param name="mapper">The mapper for mapping models to entities.</param>
-        public UserService(IUnitOfWork unitOfWork, IEmailSender emailSender, IMapper mapper)
+        public UserService(IUnitOfWork unitOfWork, IMapper mapper)
         {
             _unitOfWork = unitOfWork;
-            _emailSender = emailSender;
             _mapper = mapper;
         }
 
@@ -66,7 +65,7 @@ namespace RegApi.Services.Implementations
 
             var message = new Message([user.Email!], "Email.Confirmation Token", callback);
 
-            await _emailSender.SendEmailAsync(message);
+            await _unitOfWork.EmailSender().SendEmailAsync(message);
 
             await _unitOfWork.UserAccountRepository().AddToRoleAsync(user, "Visitor");
 
@@ -135,7 +134,7 @@ namespace RegApi.Services.Implementations
             
             var message = new Message([user.Email], "Reset password token", callback);
 
-            await _emailSender.SendEmailAsync(message);
+            await _unitOfWork.EmailSender().SendEmailAsync(message);
 
             await _unitOfWork.SaveChangesAsync();
         }
@@ -235,6 +234,33 @@ namespace RegApi.Services.Implementations
             await _unitOfWork.SaveChangesAsync();
 
             return email!;
+        }
+
+        /// <summary>
+        /// Asynchronously uploads a user's avatar photo to Azure Blob Storage and updates the user's record with the photo's URI.
+        /// </summary>
+        /// <param name="photo">The avatar photo to upload, represented as an <see cref="IFormFile"/>.</param>
+        /// <param name="userId">The ID of the user whose avatar is being uploaded.</param>
+        /// <exception cref="NullReferenceException">Thrown if the <paramref name="photo"/> is null.</exception>
+        /// <exception cref="Exception">Thrown if the uploaded file is not an image.</exception>
+        /// <returns>A task that represents the asynchronous operation.</returns>
+        public async Task UploadAvatarAsync(IFormFile photo, string userId)
+        {
+            if (photo == null)
+                throw new NullReferenceException();
+
+            if (!photo.ContentType.StartsWith("image/"))
+                throw new Exception("File must be image");
+
+            var response = await _unitOfWork.FileService().UploadAsync(photo);
+
+            var user = await _unitOfWork.UserAccountRepository().FindByIdAsync(userId);
+
+            user.AvatarUri = response.Blob.Uri;
+
+            await _unitOfWork.UserAccountRepository().UpdateAsync(user);
+
+            await _unitOfWork.SaveChangesAsync();
         }
     }
 }

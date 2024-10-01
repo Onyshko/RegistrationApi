@@ -6,6 +6,7 @@ using RegApi.Services.Interfaces;
 using RegApi.Services.Models;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authentication.Google;
+using Microsoft.AspNetCore.Authorization;
 
 namespace RegApi.Web.Controllers
 {
@@ -15,12 +16,17 @@ namespace RegApi.Web.Controllers
     {
         private readonly IUserService _userService;
         private readonly IJwtService _jwtService;
+        private readonly ISasService _sasService;
         private readonly IMapper _mapper;
 
-        public AccountController(IUserService userService, IJwtService jwtService, IMapper mapper)
+        public AccountController(IUserService userService, 
+                                 IJwtService jwtService, 
+                                 ISasService sasService, 
+                                 IMapper mapper)
         {
             _userService = userService;
             _jwtService = jwtService;
+            _sasService = sasService;
             _mapper = mapper;
         }
 
@@ -40,7 +46,9 @@ namespace RegApi.Web.Controllers
 
             var token = await _jwtService.CreateToken(userAuthenticationModel.Email);
 
-            return Ok(new AuthenticationResponsModel { IsAuthSuccessful = true, Token = token });
+            var sasToken = await _sasService.CreateToken(userAuthenticationModel.Email);
+
+            return Ok(new AuthenticationResponsModel { IsAuthSuccessful = true, Token = token, SasToken = sasToken });
         }
 
         [HttpGet("emailconfirmation")]
@@ -99,6 +107,17 @@ namespace RegApi.Web.Controllers
             var token = await _jwtService.CreateToken(email);
 
             return Ok(new AuthenticationResponsModel { IsAuthSuccessful = true, Token = token });
+        }
+
+        [Authorize]
+        [HttpPost("uploadavatar")]
+        public async Task<IActionResult> UploadAvatars(IFormFile photo)
+        {
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
+            await _userService.UploadAvatarAsync(photo, userId);
+
+            return Ok("Photo has been added");
         }
     }
 }
