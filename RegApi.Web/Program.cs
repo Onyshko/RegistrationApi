@@ -11,6 +11,7 @@ using RegApi.Domain.Entities;
 using RegApi.Repository.Context;
 using RegApi.Repository.Handlers;
 using RegApi.Repository.Models;
+using RegApi.Repository.Models.BlobModels;
 using RegApi.Repository.Utility.Registrations;
 using RegApi.Services.Utility.Exceptions;
 using RegApi.Services.Utility.Registrations;
@@ -95,8 +96,12 @@ builder.Services.AddSingleton<JwtHandler>();
 var emailConfigJson = builder.Configuration["EmailConfiguration"];
 var emailConfig = JsonConvert.DeserializeObject<EmailConfiguration>(emailConfigJson!);
 
+var blobStorageJson = builder.Configuration["BlobStorage"];
+var blobStorage = JsonConvert.DeserializeObject<BlobConfigurationModel>(blobStorageJson!);
+
 builder.Services.AddSingleton(emailConfig);
 builder.Services.AddSingleton(jwtSettings);
+builder.Services.AddSingleton(blobStorage);
 
 
 builder.Services.AddControllers();

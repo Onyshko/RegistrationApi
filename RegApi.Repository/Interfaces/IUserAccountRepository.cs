@@ -105,5 +105,12 @@ namespace RegApi.Repository.Interfaces
         /// <param name="userId">The unique identifier of the user to be found.</param>
         /// <returns>A task that represents the asynchronous operation. The task result contains the <see cref="User"/> object if found; otherwise, <c>null</c>.</returns>
         Task<User> FindByIdAsync(string userId);
+
+        /// <summary>
+        /// Updates the specified user in the database.
+        /// </summary>
+        /// <param name="user">The user entity to be updated.</param>
+        /// <returns>A task that represents the asynchronous update operation. The task result contains <see cref="IdentityResult"/>, indicating the success or failure of the operation.</returns>
+        Task<IdentityResult> UpdateAsync(User user);
     }
 }

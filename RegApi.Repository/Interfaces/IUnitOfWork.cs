@@ -18,15 +18,27 @@ namespace RegApi.Repository.Interfaces
             where TEntity : BaseEntity<TEntityId>;
 
         /// <summary>
+        /// Retrieves or creates an instance of the IUserAccountRepository.
+        /// </summary>
+        /// <returns>An instance of IUserAccountRepository.</returns>
+        Task SaveChangesAsync();
+
+        /// <summary>
         /// Saves all changes made in the context to the database asynchronously.
         /// </summary>
         /// <returns>A task representing the asynchronous save operation.</returns>
         IUserAccountRepository UserAccountRepository();
 
         /// <summary>
-        /// Retrieves or creates an instance of the IUserAccountRepository.
+        /// Gets the email sender service instance for sending emails.
         /// </summary>
-        /// <returns>An instance of IUserAccountRepository.</returns>
-        Task SaveChangesAsync();
+        /// <returns>An instance of <see cref="IEmailSender"/>.</returns>
+        IEmailSender EmailSender();
+
+        /// <summary>
+        /// Gets the file service instance for managing file operations in the blob storage.
+        /// </summary>
+        /// <returns>An instance of <see cref="IFileService"/>.</returns>
+        IFileService FileService();
     }
 }
