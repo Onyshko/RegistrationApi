@@ -2,12 +2,18 @@ using Azure.Extensions.AspNetCore.Configuration.Secrets;
 using Azure.Identity;
 using Azure.Messaging.ServiceBus;
 using EmailSender;
+using EmailSender.Models;
+using EmailSender.Services;
 using Newtonsoft.Json;
-using RegApi.EmailSender.Models;
-using RegApi.EmailSender.Services;
 using RegApi.Shared.Models;
 
 var builder = Host.CreateApplicationBuilder(args);
+
+builder.Services.Configure<HostOptions>(options =>
+{
+    options.BackgroundServiceExceptionBehavior = BackgroundServiceExceptionBehavior.Ignore;
+});
+
 builder.Services.AddHostedService<Worker>();
 
 var keyVaultUri = new Uri(builder.Configuration["KeyVaultUri"]!);
@@ -43,7 +49,6 @@ builder.Services.AddScoped(provider =>
 
     return client.CreateReceiver(busService.EmailQueue);
 });
-
 
 var host = builder.Build();
 host.Run();

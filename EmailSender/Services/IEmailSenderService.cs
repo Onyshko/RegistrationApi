@@ -1,6 +1,6 @@
-﻿using RegApi.EmailSender.Models;
+﻿using EmailSender.Models;
 
-namespace RegApi.EmailSender.Services
+namespace EmailSender.Services
 {
     /// <summary>
     /// Defines methods for sending emails.

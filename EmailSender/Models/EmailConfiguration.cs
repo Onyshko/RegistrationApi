@@ -1,4 +1,4 @@
-﻿namespace RegApi.EmailSender.Models
+﻿namespace EmailSender.Models
 {
     /// <summary>
     /// Represents the configuration settings required for sending emails.

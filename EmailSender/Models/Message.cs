@@ -1,7 +1,7 @@
 ﻿using MimeKit;
 using RegApi.Shared.Models;
 
-namespace RegApi.EmailSender.Models
+namespace EmailSender.Models
 {
     /// <summary>
     /// Represents an email message with its recipients, subject, and content.

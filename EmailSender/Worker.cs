@@ -1,7 +1,7 @@
 using Azure.Messaging.ServiceBus;
 using Newtonsoft.Json;
-using RegApi.EmailSender.Models;
-using RegApi.EmailSender.Services;
+using EmailSender.Models;
+using EmailSender.Services;
 using RegApi.Shared.Models;
 
 namespace EmailSender

@@ -1,8 +1,8 @@
 ﻿using MailKit.Net.Smtp;
 using MimeKit;
-using RegApi.EmailSender.Models;
+using EmailSender.Models;
 
-namespace RegApi.EmailSender.Services
+namespace EmailSender.Services
 {
     /// <summary>
     /// Provides functionality to send emails using SMTP.
