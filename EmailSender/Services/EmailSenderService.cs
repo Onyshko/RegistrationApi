@@ -1,17 +1,16 @@
 ﻿using MailKit.Net.Smtp;
 using MimeKit;
-using RegApi.Repository.Interfaces;
-using RegApi.Repository.Models;
+using RegApi.EmailSender.Models;
 
-namespace RegApi.Repository.Implementations
+namespace RegApi.EmailSender.Services
 {
     /// <summary>
     /// Provides functionality to send emails using SMTP.
     /// </summary>
-    public class EmailSender : IEmailSender
+    public class EmailSenderService : IEmailSenderService
     {
         private readonly EmailConfiguration _emailConfig;
-        public EmailSender(EmailConfiguration emailConfig)
+        public EmailSenderService(EmailConfiguration emailConfig)
         {
             _emailConfig = emailConfig;
         }

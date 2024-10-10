@@ -1,11 +1,11 @@
-﻿using RegApi.Repository.Models;
+﻿using RegApi.EmailSender.Models;
 
-namespace RegApi.Repository.Interfaces
+namespace RegApi.EmailSender.Services
 {
     /// <summary>
     /// Defines methods for sending emails.
     /// </summary>
-    public interface IEmailSender
+    public interface IEmailSenderService
     {
         /// <summary>
         /// Sends an email using the provided message details.

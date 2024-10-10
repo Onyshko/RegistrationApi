@@ -11,7 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RegApi.Repository", "RegApi
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RegApi.Services", "RegApi.Services\RegApi.Services.csproj", "{5D982D3A-9916-4278-A3BF-A8245B53D9C6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RegApi.Shared", "RegApi.Shared\RegApi.Shared.csproj", "{4462FB87-43D2-4DE0-9E12-A35E3F40D0F4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RegApi.Shared", "RegApi.Shared\RegApi.Shared.csproj", "{4462FB87-43D2-4DE0-9E12-A35E3F40D0F4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmailSender", "EmailSender\EmailSender.csproj", "{7C977323-6A1E-41E8-B33B-664D6D589951}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{4462FB87-43D2-4DE0-9E12-A35E3F40D0F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4462FB87-43D2-4DE0-9E12-A35E3F40D0F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4462FB87-43D2-4DE0-9E12-A35E3F40D0F4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7C977323-6A1E-41E8-B33B-664D6D589951}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7C977323-6A1E-41E8-B33B-664D6D589951}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7C977323-6A1E-41E8-B33B-664D6D589951}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7C977323-6A1E-41E8-B33B-664D6D589951}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,4 +1,4 @@
-﻿namespace RegApi.Repository.Models
+﻿namespace RegApi.EmailSender.Models
 {
     /// <summary>
     /// Represents the configuration settings required for sending emails.
@@ -30,5 +30,4 @@
         /// </summary>
         public string? Password { get; set; }
     }
-
 }

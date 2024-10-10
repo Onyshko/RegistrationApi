@@ -15,6 +15,7 @@ using RegApi.Repository.Models.BlobModels;
 using RegApi.Repository.Utility.Registrations;
 using RegApi.Services.Utility.Exceptions;
 using RegApi.Services.Utility.Registrations;
+using RegApi.Shared.Models;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -24,11 +25,6 @@ builder.Configuration.AddAzureKeyVault(keyVaultUri, new DefaultAzureCredential()
 {
     ReloadInterval = TimeSpan.FromMinutes(5)
 });
-
-string testJson = "{\"test\": { \"test2\": \"test3\" }, \"test1\": { \"test2\": \"test3\" }}";
-var test = JsonConvert.DeserializeObject<Dictionary<string, object>>(testJson);
-var testNested = test["test"].ToString();
-
 
 var connectionStringJson = builder.Configuration["ConnectionStringAzure"];
 var connectionString = JsonConvert.DeserializeObject<Dictionary<string, object>>(connectionStringJson!);
@@ -93,15 +89,16 @@ builder.Services.AddAuthorization(options =>
 
 builder.Services.AddSingleton<JwtHandler>();
 
-var emailConfigJson = builder.Configuration["EmailConfiguration"];
-var emailConfig = JsonConvert.DeserializeObject<EmailConfiguration>(emailConfigJson!);
-
 var blobStorageJson = builder.Configuration["BlobStorage"];
 var blobStorage = JsonConvert.DeserializeObject<BlobConfigurationModel>(blobStorageJson!);
 
-builder.Services.AddSingleton(emailConfig);
-builder.Services.AddSingleton(jwtSettings);
-builder.Services.AddSingleton(blobStorage);
+var busServiceJson = builder.Configuration["BusService"];
+var busService = JsonConvert.DeserializeObject<BusServiceModel>(busServiceJson!);
+
+builder.Services.AddSingleton(jwtSettings!);
+builder.Services.AddSingleton(blobStorage!);
+builder.Services.AddSingleton(busService!);
+
 
 
 builder.Services.AddControllers();
