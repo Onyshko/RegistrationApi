@@ -1,14 +1,13 @@
 ﻿using AutoMapper;
-using Azure.Identity;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.WebUtilities;
 using RegApi.Domain.Entities;
 using RegApi.Repository.Interfaces;
-using RegApi.Repository.Models;
 using RegApi.Services.Interfaces;
 using RegApi.Services.Models;
 using RegApi.Shared.Extensions.Exceptions;
+using RegApi.Shared.Models;
 using System.Security.Claims;
 
 namespace RegApi.Services.Implementations
@@ -63,9 +62,14 @@ namespace RegApi.Services.Implementations
 
             var callback = QueryHelpers.AddQueryString(userRegistrationModel.ClientUri!, param);
 
-            var message = new Message([user.Email!], "Email.Confirmation Token", callback);
+            var message = new EmailSenderModel()
+            {
+                Emails = [user.Email!],
+                Subject = "Email.Confirmation Token",
+                Content = callback
+            };
 
-            await _unitOfWork.EmailSender().SendEmailAsync(message);
+            await _unitOfWork.QueueService().SendMessageAsync(message);
 
             await _unitOfWork.UserAccountRepository().AddToRoleAsync(user, "Visitor");
 
@@ -131,10 +135,15 @@ namespace RegApi.Services.Implementations
             };
 
             var callback = QueryHelpers.AddQueryString(forgotPasswordModel.ClientUri!, param);
-            
-            var message = new Message([user.Email], "Reset password token", callback);
 
-            await _unitOfWork.EmailSender().SendEmailAsync(message);
+            var message = new EmailSenderModel()
+            {
+                Emails = [user.Email!],
+                Subject = "Reset password token",
+                Content = callback
+            };
+
+            await _unitOfWork.QueueService().SendMessageAsync(message);
 
             await _unitOfWork.SaveChangesAsync();
         }
