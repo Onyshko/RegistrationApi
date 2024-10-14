@@ -13,7 +13,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RegApi.Services", "RegApi.S
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RegApi.Shared", "RegApi.Shared\RegApi.Shared.csproj", "{4462FB87-43D2-4DE0-9E12-A35E3F40D0F4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmailSender", "EmailSender\EmailSender.csproj", "{7C977323-6A1E-41E8-B33B-664D6D589951}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmailSender", "EmailSender\EmailSender.csproj", "{8C9581EB-2864-4734-8E5E-6A9F0F0CDBEE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,10 +41,10 @@ Global
 		{4462FB87-43D2-4DE0-9E12-A35E3F40D0F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4462FB87-43D2-4DE0-9E12-A35E3F40D0F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4462FB87-43D2-4DE0-9E12-A35E3F40D0F4}.Release|Any CPU.Build.0 = Release|Any CPU
-		{7C977323-6A1E-41E8-B33B-664D6D589951}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7C977323-6A1E-41E8-B33B-664D6D589951}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7C977323-6A1E-41E8-B33B-664D6D589951}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7C977323-6A1E-41E8-B33B-664D6D589951}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8C9581EB-2864-4734-8E5E-6A9F0F0CDBEE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8C9581EB-2864-4734-8E5E-6A9F0F0CDBEE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8C9581EB-2864-4734-8E5E-6A9F0F0CDBEE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8C9581EB-2864-4734-8E5E-6A9F0F0CDBEE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
