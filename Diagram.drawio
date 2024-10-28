@@ -1,9 +1,77 @@
 <mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36" version="24.8.3">
   <diagram name="Page-1" id="VuyaqEh1r8IX7GYQfDEg">
-    <mxGraphModel>
+    <mxGraphModel dx="989" dy="514" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
+        <mxCell id="RwBYtulgWlBibL8N-Wz--8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="RwBYtulgWlBibL8N-Wz--1" target="RwBYtulgWlBibL8N-Wz--2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="RwBYtulgWlBibL8N-Wz--11" value="HTTP Requests" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="RwBYtulgWlBibL8N-Wz--8">
+          <mxGeometry x="-0.0091" y="1" relative="1" as="geometry">
+            <mxPoint y="-9" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="RwBYtulgWlBibL8N-Wz--1" value="Client (Browser/Mobile)" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="80" y="400" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="RwBYtulgWlBibL8N-Wz--12" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="RwBYtulgWlBibL8N-Wz--2" target="RwBYtulgWlBibL8N-Wz--3">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="520" y="430" />
+              <mxPoint x="520" y="350" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="RwBYtulgWlBibL8N-Wz--13" value="SQL Queries" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="RwBYtulgWlBibL8N-Wz--12">
+          <mxGeometry x="-0.0638" y="1" relative="1" as="geometry">
+            <mxPoint x="72" y="-9" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="RwBYtulgWlBibL8N-Wz--14" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="RwBYtulgWlBibL8N-Wz--2" target="RwBYtulgWlBibL8N-Wz--4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="RwBYtulgWlBibL8N-Wz--15" value="uploading/retrieving files" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="RwBYtulgWlBibL8N-Wz--14">
+          <mxGeometry x="0.3902" relative="1" as="geometry">
+            <mxPoint x="-24" y="-10" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="RwBYtulgWlBibL8N-Wz--17" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="RwBYtulgWlBibL8N-Wz--2" target="RwBYtulgWlBibL8N-Wz--5">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="520" y="430" />
+              <mxPoint x="520" y="510" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="RwBYtulgWlBibL8N-Wz--18" value="asynchronous processing of messages" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="RwBYtulgWlBibL8N-Wz--17">
+          <mxGeometry x="0.3985" relative="1" as="geometry">
+            <mxPoint x="-1" y="-10" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="RwBYtulgWlBibL8N-Wz--19" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="RwBYtulgWlBibL8N-Wz--2" target="RwBYtulgWlBibL8N-Wz--6">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="RwBYtulgWlBibL8N-Wz--20" value="OAuth Authentication" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="RwBYtulgWlBibL8N-Wz--19">
+          <mxGeometry x="0.0169" y="1" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="RwBYtulgWlBibL8N-Wz--2" value="Web API (ASP.NET Core)" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="360" y="400" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="RwBYtulgWlBibL8N-Wz--3" value="SQL Database" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="716.55" y="320" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="RwBYtulgWlBibL8N-Wz--4" value="Azure Blob Storage" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="716.55" y="400" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="RwBYtulgWlBibL8N-Wz--5" value="Azure Service Bus" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="716.55" y="480" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="RwBYtulgWlBibL8N-Wz--6" value="Google&lt;br&gt;Authentication" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="360" y="550" width="120" height="60" as="geometry" />
+        </mxCell>
       </root>
     </mxGraphModel>
   </diagram>
