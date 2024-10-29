@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36" version="24.8.3" pages="2">
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36" version="24.8.3" pages="3">
   <diagram name="RegApi" id="VuyaqEh1r8IX7GYQfDEg">
     <mxGraphModel dx="989" dy="514" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
@@ -236,6 +236,75 @@
         </mxCell>
         <mxCell id="rSprbAb2lOTUIJeIylOn-25" value="&lt;b&gt;Google Authentication&lt;br&gt;&lt;/b&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
           <mxGeometry x="680" y="700" width="120" height="60" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="Sn0QI4TNHMXdVh63znc3" name="Roles">
+    <mxGraphModel dx="1434" dy="746" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="s8kQlIOma55yZ-rr_XGs-2" value="&lt;b&gt;&lt;font style=&quot;font-size: 20px;&quot;&gt;Roles in RegApi&lt;/font&gt;&lt;/b&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="580.75" y="120" width="355" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="s8kQlIOma55yZ-rr_XGs-11" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="s8kQlIOma55yZ-rr_XGs-3" target="s8kQlIOma55yZ-rr_XGs-8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="s8kQlIOma55yZ-rr_XGs-12" value="&lt;font style=&quot;font-size: 14px;&quot;&gt;Can add new tickets&lt;/font&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="s8kQlIOma55yZ-rr_XGs-11">
+          <mxGeometry x="-0.2133" y="3" relative="1" as="geometry">
+            <mxPoint x="21" y="-7" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="s8kQlIOma55yZ-rr_XGs-13" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="s8kQlIOma55yZ-rr_XGs-3" target="s8kQlIOma55yZ-rr_XGs-9">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="s8kQlIOma55yZ-rr_XGs-15" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="s8kQlIOma55yZ-rr_XGs-3" target="s8kQlIOma55yZ-rr_XGs-10">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="s8kQlIOma55yZ-rr_XGs-16" value="&lt;font style=&quot;font-size: 14px;&quot;&gt;Can update own ticket status&lt;/font&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="s8kQlIOma55yZ-rr_XGs-15">
+          <mxGeometry x="0.7823" y="-2" relative="1" as="geometry">
+            <mxPoint x="-58" y="-22" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="s8kQlIOma55yZ-rr_XGs-18" value="&lt;span style=&quot;font-size: 14px;&quot;&gt;Can view all tickets&lt;/span&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="s8kQlIOma55yZ-rr_XGs-15">
+          <mxGeometry x="-0.148" y="-2" relative="1" as="geometry">
+            <mxPoint y="16" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="s8kQlIOma55yZ-rr_XGs-3" value="&lt;blockquote style=&quot;margin: 0 0 0 40px; border: none; padding: 0px;&quot;&gt;&lt;div&gt;&lt;font size=&quot;1&quot; color=&quot;#ff0303&quot;&gt;&lt;b style=&quot;font-size: 14px;&quot;&gt;Role: Admin&lt;/b&gt;&lt;/font&gt;&lt;/div&gt;&lt;div&gt;&lt;font color=&quot;#ff0303&quot;&gt;ID: 11a3d48f-e7ff-46e6-a897-9664e603a824&lt;/font&gt;&lt;/div&gt;&lt;div&gt;&lt;font color=&quot;#ff0303&quot;&gt;Description: The admin role for the user&lt;/font&gt;&lt;/div&gt;&lt;/blockquote&gt;" style="rounded=0;whiteSpace=wrap;html=1;align=left;" vertex="1" parent="1">
+          <mxGeometry x="90" y="310" width="320" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="s8kQlIOma55yZ-rr_XGs-21" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="s8kQlIOma55yZ-rr_XGs-4" target="s8kQlIOma55yZ-rr_XGs-9">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="s8kQlIOma55yZ-rr_XGs-23" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="s8kQlIOma55yZ-rr_XGs-4" target="s8kQlIOma55yZ-rr_XGs-10">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="s8kQlIOma55yZ-rr_XGs-24" value="&lt;font style=&quot;font-size: 14px;&quot;&gt;Can update own ticket status&lt;/font&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="s8kQlIOma55yZ-rr_XGs-23">
+          <mxGeometry x="0.3336" y="1" relative="1" as="geometry">
+            <mxPoint x="15" y="20" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="s8kQlIOma55yZ-rr_XGs-25" value="&lt;span style=&quot;font-size: 14px;&quot;&gt;Can view own tickets&lt;/span&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="s8kQlIOma55yZ-rr_XGs-23">
+          <mxGeometry x="-0.081" y="-1" relative="1" as="geometry">
+            <mxPoint x="7" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="s8kQlIOma55yZ-rr_XGs-4" value="&lt;blockquote style=&quot;margin: 0 0 0 40px; border: none; padding: 0px;&quot;&gt;&lt;div&gt;&lt;font size=&quot;1&quot; color=&quot;#007fff&quot;&gt;&lt;b style=&quot;font-size: 14px;&quot;&gt;Role: Visitor&lt;/b&gt;&lt;/font&gt;&lt;/div&gt;&lt;div&gt;&lt;font color=&quot;#007fff&quot;&gt;ID: f99d2eae-0f12-4873-88ed-4df42a9a4cda&lt;/font&gt;&lt;/div&gt;&lt;div&gt;&lt;font color=&quot;#007fff&quot;&gt;Description: The visitor role for the user&lt;/font&gt;&lt;/div&gt;&lt;/blockquote&gt;" style="rounded=0;whiteSpace=wrap;html=1;align=left;" vertex="1" parent="1">
+          <mxGeometry x="1115" y="310" width="320" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="s8kQlIOma55yZ-rr_XGs-6" value="&lt;div style=&quot;&quot;&gt;&lt;b&gt;&lt;font style=&quot;font-size: 14px;&quot;&gt;TicketController&lt;/font&gt;&lt;/b&gt;&lt;br&gt;&lt;br&gt;&lt;/div&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;Provides API endpoints for managing tickets.&lt;/span&gt;" style="rounded=0;whiteSpace=wrap;html=1;align=center;" vertex="1" parent="1">
+          <mxGeometry x="603.5" y="180" width="309.5" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="s8kQlIOma55yZ-rr_XGs-8" value="&lt;div style=&quot;&quot;&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;b&gt;&lt;font style=&quot;font-size: 14px;&quot;&gt;AddTicket&lt;/font&gt;&lt;font style=&quot;font-size: 12px;&quot;&gt;&lt;br&gt;POST api/ticket&lt;/font&gt;&lt;/b&gt;&lt;/div&gt;&lt;div&gt;[Authorize(Policy = &quot;OnlyAdminUsers&quot;)]&lt;/div&gt;&lt;div&gt;Adds a new ticket.&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;align=center;" vertex="1" parent="1">
+          <mxGeometry x="603" y="310" width="309.5" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="s8kQlIOma55yZ-rr_XGs-9" value="&lt;div style=&quot;&quot;&gt;&lt;b&gt;&lt;font style=&quot;font-size: 14px;&quot;&gt;GetTickets&lt;/font&gt;&lt;/b&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;&lt;b&gt;&lt;font style=&quot;font-size: 12px;&quot;&gt;&lt;br&gt;GET api/tickets&lt;/font&gt;&lt;/b&gt;&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;div&gt;[Authorize]&lt;/div&gt;&lt;div&gt;Retrieves tickets based on user&#39;s role.&lt;/div&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;align=center;" vertex="1" parent="1">
+          <mxGeometry x="603" y="420" width="309.5" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="s8kQlIOma55yZ-rr_XGs-10" value="&lt;div style=&quot;&quot;&gt;&lt;div&gt;&lt;b&gt;&lt;font style=&quot;font-size: 14px;&quot;&gt;UpdateStatus&lt;/font&gt;&lt;font style=&quot;&quot;&gt;&lt;br&gt;&lt;font style=&quot;font-size: 12px;&quot;&gt;PUT api/ticket&lt;/font&gt;&lt;/font&gt;&lt;/b&gt;&lt;/div&gt;&lt;div&gt;[Authorize]&lt;/div&gt;&lt;div&gt;Updates the status of a ticket.&lt;/div&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;align=center;" vertex="1" parent="1">
+          <mxGeometry x="603" y="530" width="309.5" height="100" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
