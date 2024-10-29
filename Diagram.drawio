@@ -417,8 +417,8 @@
         <mxCell id="qxv3fIsgYOLEzyIm1OQP-25" value="Service for working with files" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
           <mxGeometry x="385" y="220" width="110" height="25" as="geometry" />
         </mxCell>
-        <mxCell id="qxv3fIsgYOLEzyIm1OQP-26" value="&#xa;Сервіс для обробки повідомлень&#xa;&#xa;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
-          <mxGeometry x="380" y="370" width="120" height="40" as="geometry" />
+        <mxCell id="qxv3fIsgYOLEzyIm1OQP-27" value="Message processing service" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="355" y="378" width="170" height="30" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
