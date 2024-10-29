@@ -411,7 +411,7 @@
         <mxCell id="qxv3fIsgYOLEzyIm1OQP-23" value="Coordinates work with repositories and services" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
           <mxGeometry x="72.5" y="190" width="135" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="qxv3fIsgYOLEzyIm1OQP-24" value="Репозиторій для керування обліковими записами." style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+        <mxCell id="qxv3fIsgYOLEzyIm1OQP-24" value="Account management repository." style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
           <mxGeometry x="355" y="50" width="170" height="30" as="geometry" />
         </mxCell>
         <mxCell id="qxv3fIsgYOLEzyIm1OQP-25" value="Service for working with files" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
